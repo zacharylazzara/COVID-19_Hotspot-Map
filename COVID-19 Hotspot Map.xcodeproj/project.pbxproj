@@ -20,6 +20,7 @@
 		B638724D2569982D00174C71 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638724C2569982D00174C71 /* Region.swift */; };
 		B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF292569B23800A3DBA6 /* Province.swift */; };
 		B67DCF2D2569BCB200A3DBA6 /* CovidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */; };
+		B67DCF302569C3DD00A3DBA6 /* Hotspot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF2F2569C3DD00A3DBA6 /* Hotspot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B638724C2569982D00174C71 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B67DCF292569B23800A3DBA6 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
 		B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidViewModel.swift; sourceTree = "<group>"; };
+		B67DCF2F2569C3DD00A3DBA6 /* Hotspot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotspot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				B6387244256987EE00174C71 /* Summary.swift */,
 				B638724C2569982D00174C71 /* Region.swift */,
 				B67DCF292569B23800A3DBA6 /* Province.swift */,
+				B67DCF2F2569C3DD00A3DBA6 /* Hotspot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				B638724D2569982D00174C71 /* Region.swift in Sources */,
 				B63872492569887100174C71 /* LocationManager.swift in Sources */,
 				B63872282569879C00174C71 /* SceneDelegate.swift in Sources */,
+				B67DCF302569C3DD00A3DBA6 /* Hotspot.swift in Sources */,
 				B6387245256987EE00174C71 /* Summary.swift in Sources */,
 				B638722A2569879C00174C71 /* ContentView.swift in Sources */,
 			);
