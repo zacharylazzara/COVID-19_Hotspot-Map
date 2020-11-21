@@ -26,6 +26,13 @@ class CovidViewModel : ObservableObject {
     
     // TODO: Use this one in the heatmap; it will return an array of hotspots for a givenprovience
     func predictHotspots(province: Province) -> [Hotspot] {
+        /* TODO:
+         - Get active cases from province
+         - Get population data for province from SQL or CSV file (or another API if possible)
+         - Divide active cases among each city in the province by population
+         */
+        
+        
         
         
         
