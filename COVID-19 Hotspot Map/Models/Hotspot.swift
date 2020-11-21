@@ -12,7 +12,4 @@ struct Hotspot {
     var locallity: String // This will be the city or town
     var predictedCases: Int // Number of active cases we think this town has based on its population and active cases by province or health region
     var population: Int
-    
-    
-    
 }

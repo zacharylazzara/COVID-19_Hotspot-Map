@@ -34,6 +34,15 @@ class CovidViewModel : ObservableObject {
         
         
         
+//        let cities = [City]() // TODO: we need to get city data from a database; maybe we'll do that here rather than in a model?
+//
+//        var hotspots = [Hotspot]()
+//
+//        cities.forEach { city in
+//            var hotspot = Hotspot()
+//            hotspot.predictedCases = province.activeCases / city.population
+//            hotspots.append(hotspot)
+//        }
         
         
         return [Hotspot]()
