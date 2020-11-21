@@ -24,7 +24,7 @@ import Foundation
 
 class CovidViewModel : ObservableObject {
     
-    // TODO: Use this one in the heatmap; it will return an array of hotspots for a givenprovience
+    // TODO: Use this one in the heatmap; it will return an array of hotspots for a given provience
     func predictHotspots(province: Province) -> [Hotspot] {
         /* TODO:
          - Get active cases from province
