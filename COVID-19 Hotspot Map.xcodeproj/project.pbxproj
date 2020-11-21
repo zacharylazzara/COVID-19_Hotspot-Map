@@ -14,6 +14,12 @@
 		B638722F2569879E00174C71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B638722E2569879E00174C71 /* Assets.xcassets */; };
 		B63872322569879E00174C71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B63872312569879E00174C71 /* Preview Assets.xcassets */; };
 		B63872352569879E00174C71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B63872332569879E00174C71 /* LaunchScreen.storyboard */; };
+		B6387241256987D200174C71 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6387240256987D200174C71 /* SummaryViewModel.swift */; };
+		B6387245256987EE00174C71 /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6387244256987EE00174C71 /* Summary.swift */; };
+		B63872492569887100174C71 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63872482569887100174C71 /* LocationManager.swift */; };
+		B638724D2569982D00174C71 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638724C2569982D00174C71 /* Region.swift */; };
+		B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF292569B23800A3DBA6 /* Province.swift */; };
+		B67DCF2D2569BCB200A3DBA6 /* CovidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,12 @@
 		B63872312569879E00174C71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B63872342569879E00174C71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B63872362569879E00174C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6387240256987D200174C71 /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
+		B6387244256987EE00174C71 /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
+		B63872482569887100174C71 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		B638724C2569982D00174C71 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
+		B67DCF292569B23800A3DBA6 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
+		B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +70,12 @@
 		B63872242569879C00174C71 /* COVID-19 Hotspot Map */ = {
 			isa = PBXGroup;
 			children = (
+				B63872472569886400174C71 /* Utils */,
+				B638723F256987B300174C71 /* ViewModels */,
+				B638723E256987AF00174C71 /* Views */,
+				B638723D256987A800174C71 /* Models */,
 				B63872252569879C00174C71 /* AppDelegate.swift */,
 				B63872272569879C00174C71 /* SceneDelegate.swift */,
-				B63872292569879C00174C71 /* ContentView.swift */,
 				B638722E2569879E00174C71 /* Assets.xcassets */,
 				B63872332569879E00174C71 /* LaunchScreen.storyboard */,
 				B63872362569879E00174C71 /* Info.plist */,
@@ -76,6 +91,41 @@
 				B63872312569879E00174C71 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B638723D256987A800174C71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B6387244256987EE00174C71 /* Summary.swift */,
+				B638724C2569982D00174C71 /* Region.swift */,
+				B67DCF292569B23800A3DBA6 /* Province.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B638723E256987AF00174C71 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B63872292569879C00174C71 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B638723F256987B300174C71 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B6387240256987D200174C71 /* SummaryViewModel.swift */,
+				B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B63872472569886400174C71 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B63872482569887100174C71 /* LocationManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,9 +198,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B67DCF2D2569BCB200A3DBA6 /* CovidViewModel.swift in Sources */,
 				B638722D2569879C00174C71 /* COVID_19_Hotspot_Map.xcdatamodeld in Sources */,
+				B6387241256987D200174C71 /* SummaryViewModel.swift in Sources */,
 				B63872262569879C00174C71 /* AppDelegate.swift in Sources */,
+				B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */,
+				B638724D2569982D00174C71 /* Region.swift in Sources */,
+				B63872492569887100174C71 /* LocationManager.swift in Sources */,
 				B63872282569879C00174C71 /* SceneDelegate.swift in Sources */,
+				B6387245256987EE00174C71 /* Summary.swift in Sources */,
 				B638722A2569879C00174C71 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
