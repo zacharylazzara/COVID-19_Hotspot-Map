@@ -30,9 +30,12 @@ class CovidViewModel : ObservableObject {
          - Get active cases from province
          - Get population data for province from SQL or CSV file (or another API if possible)
          - Divide active cases among each city in the province by population
+         
+         Note: We'll probably want to take population density into account as well, as it will determine how likely any given person is to bump into someone infected
          */
         
-        
+        // TODO: use this table? https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1710013501
+        //https://www12.statcan.gc.ca/wds-sdw/cpr2016-eng.cfm
         
 //        let cities = [City]() // TODO: we need to get city data from a database; maybe we'll do that here rather than in a model?
 //
