@@ -21,6 +21,9 @@
 		B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF292569B23800A3DBA6 /* Province.swift */; };
 		B67DCF2D2569BCB200A3DBA6 /* CovidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */; };
 		B67DCF302569C3DD00A3DBA6 /* Hotspot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF2F2569C3DD00A3DBA6 /* Hotspot.swift */; };
+		B67DCF482569F01200A3DBA6 /* city_database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B67DCF472569F01200A3DBA6 /* city_database.sqlite */; };
+		B67DCF502569F20200A3DBA6 /* canadacities.json in Resources */ = {isa = PBXBuildFile; fileRef = B67DCF4F2569F20200A3DBA6 /* canadacities.json */; };
+		B67DCF572569F67B00A3DBA6 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF562569F67B00A3DBA6 /* City.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		B67DCF292569B23800A3DBA6 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
 		B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidViewModel.swift; sourceTree = "<group>"; };
 		B67DCF2F2569C3DD00A3DBA6 /* Hotspot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotspot.swift; sourceTree = "<group>"; };
+		B67DCF472569F01200A3DBA6 /* city_database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = city_database.sqlite; sourceTree = "<group>"; };
+		B67DCF4F2569F20200A3DBA6 /* canadacities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = canadacities.json; sourceTree = "<group>"; };
+		B67DCF562569F67B00A3DBA6 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +85,10 @@
 				B63872252569879C00174C71 /* AppDelegate.swift */,
 				B63872272569879C00174C71 /* SceneDelegate.swift */,
 				B638722E2569879E00174C71 /* Assets.xcassets */,
+				B67DCF4F2569F20200A3DBA6 /* canadacities.json */,
 				B63872332569879E00174C71 /* LaunchScreen.storyboard */,
+				B67DCF472569F01200A3DBA6 /* city_database.sqlite */,
 				B63872362569879E00174C71 /* Info.plist */,
-				B638722B2569879C00174C71 /* COVID_19_Hotspot_Map.xcdatamodeld */,
 				B63872302569879E00174C71 /* Preview Content */,
 			);
 			path = "COVID-19 Hotspot Map";
@@ -98,10 +105,12 @@
 		B638723D256987A800174C71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B638722B2569879C00174C71 /* COVID_19_Hotspot_Map.xcdatamodeld */,
 				B6387244256987EE00174C71 /* Summary.swift */,
 				B638724C2569982D00174C71 /* Region.swift */,
 				B67DCF292569B23800A3DBA6 /* Province.swift */,
 				B67DCF2F2569C3DD00A3DBA6 /* Hotspot.swift */,
+				B67DCF562569F67B00A3DBA6 /* City.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +198,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B63872352569879E00174C71 /* LaunchScreen.storyboard in Resources */,
+				B67DCF502569F20200A3DBA6 /* canadacities.json in Resources */,
+				B67DCF482569F01200A3DBA6 /* city_database.sqlite in Resources */,
 				B63872322569879E00174C71 /* Preview Assets.xcassets in Resources */,
 				B638722F2569879E00174C71 /* Assets.xcassets in Resources */,
 			);
@@ -211,6 +222,7 @@
 				B63872282569879C00174C71 /* SceneDelegate.swift in Sources */,
 				B67DCF302569C3DD00A3DBA6 /* Hotspot.swift in Sources */,
 				B6387245256987EE00174C71 /* Summary.swift in Sources */,
+				B67DCF572569F67B00A3DBA6 /* City.swift in Sources */,
 				B638722A2569879C00174C71 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

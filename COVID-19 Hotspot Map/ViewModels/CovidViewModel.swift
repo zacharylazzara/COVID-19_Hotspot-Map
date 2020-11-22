@@ -53,4 +53,30 @@ class CovidViewModel : ObservableObject {
     
     
     
+    
+    
+    func initializeCityData() {
+        var city = City()
+        
+        
+        // follow this tutorial https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
+        DispatchQueue.global().async {
+            do {
+                if let jsonData = Bundle.main.path(forResource: "canadacities", ofType: "json") {
+                    let decoder = JSONDecoder()
+                    let decodedSummary = try decoder.decode(City.self, from: jsonData)
+                    DispatchQueue.main.async {
+                        self.summary = decodedSummary
+                        print(#function, "COVID-19 Summary: \(self)")
+                    }
+                } else {
+                    print(#function, "JSON data is empty")
+                }
+            } catch let error {
+                print(#function, "Error decoding data: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
 }
