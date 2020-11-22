@@ -70,7 +70,7 @@ class CovidViewModel : ObservableObject {
         // Population Data Sources for Provinces
         // Population by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population.html
         // Density by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population-density.html
-        var provinceDensities = [
+        let provinceDensities = [
             "Prince Edward Island": 24.7,
             "Nova Scotia": 17.4,
             "Ontario": 14.1,
@@ -87,7 +87,7 @@ class CovidViewModel : ObservableObject {
         ]
         
         // TODO: we should build these numbers from our JSON data, as we have population numbers for each city tied to their provinces; if we sum that up we can get numbers more in line with our data (but for now this is easier)
-        var provincePopulations = [
+        let provincePopulations = [
             "Prince Edward Island": 142907,
             "Nova Scotia": 923598,
             "Ontario": 12851821,
@@ -103,7 +103,11 @@ class CovidViewModel : ObservableObject {
             "Nunavut": 35944
         ]
         
-        city.covidCases = city.population / provincePopulations[city.province] * province?.activeCases - city.density/provinceDensities[city.province]
+        let provincePopulation = Int64(provincePopulations[city.province!]!)
+        let provinceDensity = Int64(provinceDensities[city.province!]!)
+        
+        // This is our prediction; it's fairly accurate when tested against Toronto but seems less accurate tested against Oakville; more testing and tweaking is needed
+        city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density) / provinceDensity
         
         
         //city.covidCases = city.population / province.population * province?.activeCases // This is our prediction, it seems fairly accurate!

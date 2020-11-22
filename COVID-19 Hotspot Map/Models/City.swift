@@ -56,7 +56,7 @@ class City: NSManagedObject, Decodable {
         self.name = try city.decodeIfPresent(String.self, forKey: .name)!
         self.province = try city.decodeIfPresent(String.self, forKey: .province)!
         self.provinceId = try city.decodeIfPresent(String.self, forKey: .provinceId)!
-        self.population = try city.decodeIfPresent(Int32.self, forKey: .population)!
+        self.population = try city.decodeIfPresent(Int64.self, forKey: .population)!
         self.density = try city.decodeIfPresent(Double.self, forKey: .density)!
         self.lat = try city.decodeIfPresent(Double.self, forKey: .lat)!
         self.lng = try city.decodeIfPresent(Double.self, forKey: .lng)!
