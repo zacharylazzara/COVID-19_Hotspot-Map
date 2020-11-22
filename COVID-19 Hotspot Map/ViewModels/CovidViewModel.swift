@@ -7,7 +7,6 @@
 
 import Foundation
 import CoreData
-import UIKit
 
 // TODO: this view model needs to calculate the danger based on the active cases and population of each region
 // TODO: this view model will also be the data provider to the heat map
@@ -64,6 +63,7 @@ class CovidViewModel : ObservableObject {
     
     
     // TODO: Use this one in the heatmap; it will return an array of hotspots for a given provience
+    // NOTE: COVID-19 has a Re of 1.1 (effective reproduction number); it's the average number of people one person with COVID-19 will infect; we need to use this in our predictions and other data
     func predictCasesForCity(city: City) -> City {
         var province = fetchProvincialSummary(admin: city.provinceId!)
         
@@ -104,12 +104,16 @@ class CovidViewModel : ObservableObject {
         ]
         
         let provincePopulation = Int64(provincePopulations[city.province!]!)
-        let provinceDensity = Int64(provinceDensities[city.province!]!)
-        
+        let provinceDensity = provinceDensities[city.province!]
+        var City = city
+//
+//        let provincePopulation = Int64(provincePopulations[city.province!]!)
+//        let provinceDensity = Int64(provinceDensities[city.province!]!)
+//
         // This is our prediction; it's fairly accurate when tested against Toronto but seems less accurate tested against Oakville; more testing and tweaking is needed
-        city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density) / provinceDensity
-        
-        
+        //city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density) / provinceDensity
+        city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density / provinceDensity!)
+        return city
         //city.covidCases = city.population / province.population * province?.activeCases // This is our prediction, it seems fairly accurate!
         //city.covidCases = city.population / provincePopulations[city.province] * province?.activeCases - city.density/provinceDensities[city.province] // more accurate predictor!
         
@@ -130,62 +134,60 @@ class CovidViewModel : ObservableObject {
         // TODO: use this table? https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1710013501
         //https://www12.statcan.gc.ca/wds-sdw/cpr2016-eng.cfm
         
-        let cities = [City]() // TODO: we need to get city data from a database; maybe we'll do that here rather than in a model?
+//        let cities = [City]() // TODO: we need to get city data from a database; maybe we'll do that here rather than in a model?
+//
+//        var hotspots = [Hotspot]()
 
-        var hotspots = [Hotspot]()
-
-        cities.forEach { city in
-            city.covidCases = province.activeCases / city.population // TODO: tie density into this, maybe multiply by density?
-            
-            
-//            var hotspot = Hotspot()
-//            hotspot.predictedCases = province.activeCases / city.population
-//            hotspots.append(hotspot)
-        }
+//        cities.forEach { city in
+//            city.covidCases = province.activeCases / city.population // TODO: tie density into this, maybe multiply by density?
+//
+//
+////            var hotspot = Hotspot()
+////            hotspot.predictedCases = province.activeCases / city.population
+////            hotspots.append(hotspot)
+//        }
         
         
         // TODO: we'll figure out which city we're closest to using the latlng of the city and our current latlng?
         // Maybe we should save the predicted numbers to the City entity so we don't need to retrieve them so often!
         
         
-        return [Hotspot]()
+        //return [Hotspot]()
     }
     
     
-    
-    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "COVID_19_Hotspot_Map")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
     
     func initializeCityData() {
-       // var city = City()
-        
-        
-        // follow this tutorial? https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
-        
-        //https://stackoverflow.com/questions/52555913/save-complex-json-to-core-data-in-swift
-        DispatchQueue.global().async {
-            do {
-                if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
-                    let data = try Data(contentsOf: url)
-                    let decoder = JSONDecoder()
-                    
-                    // TODO: does it save automatically? or do we need to save it ourselves?
-                    _ = try decoder.decode(City.self, from: data)
-                    
-//                    let cities = try decoder.decode(City.self, from: data)
-//                    DispatchQueue.main.async {
-//
-//                        
-//
-//                        // TODO: do we need to save it to the database now?
-//                        self.summary = cities
-//                        print(#function, "COVID-19 Summary: \(self)")
-//                    }
-                } else {
-                    print(#function, "JSON data is empty")
-                }
-            } catch let error {
-                print(#function, "Error decoding data: \(error.localizedDescription)")
+        do {
+            if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+
+                decoder.userInfo[CodingUserInfoKey.context!] = self.persistentContainer.viewContext
+
+                // TODO: does it save automatically? or do we need to save it ourselves?
+                self.cities = try decoder.decode([City].self, from: data)
+                
+                //print(self.cities)
+//                do {
+//                    try self.persistentContainer.viewContext.save()
+//                } catch {
+//                    print(error)
+//                }
+            } else {
+                print(#function, "JSON data is empty")
             }
+        } catch let error {
+            print(#function, "Error decoding data: \(error)")
         }
     }
 }

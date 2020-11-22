@@ -9,8 +9,8 @@
     <entity name="City" representedClassName=".City" syncable="YES" codeGenerationType="category">
         <attribute name="covidCases" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="density" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="lat" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="lng" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lat" attributeType="Double" defaultValueString="-1" usesScalarValueType="YES"/>
+        <attribute name="lng" attributeType="Double" defaultValueString="-1" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="population" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="province" attributeType="String"/>

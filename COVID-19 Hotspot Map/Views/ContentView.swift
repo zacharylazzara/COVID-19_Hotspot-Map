@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var summaryViewModel: SummaryViewModel
+    @EnvironmentObject var covidViewModel: CovidViewModel
     var body: some View {
         VStack {
             Text("Province: \(summaryViewModel.province.name ?? "unavailable")")
@@ -20,8 +21,18 @@ struct ContentView: View {
 //            }
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595")
-            CovidViewModel().initializeCityData()
+            covidViewModel.initializeCityData()
+            
+            
+//            covidViewModel.cities.forEach { city in
+//                print(city)
+//            }
+            
             summaryViewModel.fetchProvincialSummary(admin: "ON")
+            //var city2 = covidViewModel.predictCasesForCity(city: city)
+            
+           // print(city2)
+            
         }
         
         
