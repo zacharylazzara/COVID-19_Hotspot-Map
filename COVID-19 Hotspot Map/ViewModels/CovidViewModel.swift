@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
 // TODO: this view model needs to calculate the danger based on the active cases and population of each region
 // TODO: this view model will also be the data provider to the heat map
@@ -23,9 +25,103 @@ import Foundation
  */
 
 class CovidViewModel : ObservableObject {
+    private var apiURLString = "https://api.opencovid.ca/"
+    @Published public var cities = [City]()
+    
+    // TODO: we should save the results of this in the city entity, or better we can save the results of the prediction
+    func fetchProvincialSummary(admin: String) -> Province? {
+        var province: Province?
+        
+        let provincialSummary = "/summary?loc=\(admin)"
+        guard let apiURL = URL(string: apiURLString + provincialSummary) else {
+            print(#function, "Problem with API URL:\n\n\(apiURLString + provincialSummary)\n\n")
+            return province
+        }
+        
+        URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
+            if let e = error {
+                print(#function, "Error \(e.localizedDescription)")
+            } else {
+                DispatchQueue.global().async {
+                    do {
+                        if let jsonData = data {
+                            let decoder = JSONDecoder()
+                            let decodedSummary = try decoder.decode(Province.self, from: jsonData)
+                            DispatchQueue.main.async {
+                                province = decodedSummary
+                            }
+                        } else {
+                            print(#function, "JSON data is empty")
+                        }
+                    } catch let error {
+                        print(#function, "Error decoding data: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }.resume()
+        return province
+    }
+    
     
     // TODO: Use this one in the heatmap; it will return an array of hotspots for a given provience
-    func predictHotspots(province: Province) -> [Hotspot] {
+    func predictCasesForCity(city: City) -> City {
+        var province = fetchProvincialSummary(admin: city.provinceId!)
+        
+        // Population Data Sources for Provinces
+        // Population by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population.html
+        // Density by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population-density.html
+        var provincePopulationDensities = [
+            "Prince Edward Island": 24.7,
+            "Nova Scotia": 17.4,
+            "Ontario": 14.1,
+            "New Brunswick": 10.5,
+            "Quebec": 5.8,
+            "Alberta": 5.7,
+            "British Columbia": 4.8,
+            "Manitoba": 2.2,
+            "Saskatchewan": 1.8,
+            "Newfoundland and Labrador": 1.4,
+            "Yukon": 0.1,
+            "Northwest Territories": 0,
+            "Nunavut": 0
+        ]
+        
+        // TODO: we should build these numbers from our JSON data, as we have population numbers for each city tied to their provinces; if we sum that up we can get numbers more in line with our data (but for now this is easier)
+        var provincePopulation = [
+            "Prince Edward Island": 142907,
+            "Nova Scotia": 923598,
+            "Ontario": 12851821,
+            "New Brunswick": ,
+            "Quebec": 8164361,
+            "Alberta": 4067175,
+            "British Columbia": 4648055,
+            "Manitoba": 1278365,
+            "Saskatchewan": 1098352,
+            "Newfoundland and Labrador": 519716,
+            "Yukon": 35874,
+            "Northwest Territories": 41786,
+            "Nunavut": 35944
+        ]
+        
+        
+        
+        
+        
+        var provincePopulation: Int
+        
+        cities.forEach { city in
+            provincePopulation
+        }
+        
+        //city.covidCases = city.population / province.population * province?.activeCases // This is our prediction, it seems fairly accurate!
+        city.covidCases = city.population / province.population * province?.activeCases - city.density/province.density // more accurate predictor!
+        
+        //city.covidCases = province?.activeCases / city.population
+        
+        
+        // TODO: probably need to get the ratio of people in Toronto vs Ontario first!!
+        
+        
         /* TODO:
          - Get active cases from province
          - Get population data for province from SQL or CSV file (or another API if possible)
@@ -37,15 +133,22 @@ class CovidViewModel : ObservableObject {
         // TODO: use this table? https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1710013501
         //https://www12.statcan.gc.ca/wds-sdw/cpr2016-eng.cfm
         
-//        let cities = [City]() // TODO: we need to get city data from a database; maybe we'll do that here rather than in a model?
-//
-//        var hotspots = [Hotspot]()
-//
-//        cities.forEach { city in
+        let cities = [City]() // TODO: we need to get city data from a database; maybe we'll do that here rather than in a model?
+
+        var hotspots = [Hotspot]()
+
+        cities.forEach { city in
+            city.covidCases = province.activeCases / city.population // TODO: tie density into this, maybe multiply by density?
+            
+            
 //            var hotspot = Hotspot()
 //            hotspot.predictedCases = province.activeCases / city.population
 //            hotspots.append(hotspot)
-//        }
+        }
+        
+        
+        // TODO: we'll figure out which city we're closest to using the latlng of the city and our current latlng?
+        // Maybe we should save the predicted numbers to the City entity so we don't need to retrieve them so often!
         
         
         return [Hotspot]()
@@ -56,19 +159,30 @@ class CovidViewModel : ObservableObject {
     
     
     func initializeCityData() {
-        var city = City()
+       // var city = City()
         
         
-        // follow this tutorial https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
+        // follow this tutorial? https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
+        
+        //https://stackoverflow.com/questions/52555913/save-complex-json-to-core-data-in-swift
         DispatchQueue.global().async {
             do {
-                if let jsonData = Bundle.main.path(forResource: "canadacities", ofType: "json") {
+                if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
+                    let data = try Data(contentsOf: url)
                     let decoder = JSONDecoder()
-                    let decodedSummary = try decoder.decode(City.self, from: jsonData)
-                    DispatchQueue.main.async {
-                        self.summary = decodedSummary
-                        print(#function, "COVID-19 Summary: \(self)")
-                    }
+                    
+                    // TODO: does it save automatically? or do we need to save it ourselves?
+                    _ = try decoder.decode(City.self, from: data)
+                    
+//                    let cities = try decoder.decode(City.self, from: data)
+//                    DispatchQueue.main.async {
+//
+//                        
+//
+//                        // TODO: do we need to save it to the database now?
+//                        self.summary = cities
+//                        print(#function, "COVID-19 Summary: \(self)")
+//                    }
                 } else {
                     print(#function, "JSON data is empty")
                 }
@@ -77,6 +191,4 @@ class CovidViewModel : ObservableObject {
             }
         }
     }
-    
-    
 }

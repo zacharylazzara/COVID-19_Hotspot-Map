@@ -6,21 +6,22 @@
 //
 
 import Foundation
+import CoreData
 
 // Tutorial for this: https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
 
 class City: NSManagedObject, Decodable {
-    var name: String?
-    var province: String?
-    var provinceId: String?
-    var population: Int32?
-    var density: Double?
-    var lat: Double?
-    var lng: Double?
+//    var name: String?
+//    var province: String?
+//    var provinceId: String?
+//    var population: Int32?
+//    var density: Double?
+//    var lat: Double?
+//    var lng: Double?
     
     //init() {}
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case city = "city"
         case name = "city_ascii"
         case province = "province_name"
@@ -31,16 +32,22 @@ class City: NSManagedObject, Decodable {
         case lng = "lng"
     }
     
-    enum DecoderConfigurationError: Error {
-        case missingManagedObjectContext
-    }
-    
     required convenience init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
-            throw DecoderConfigurationError.missingManagedObjectContext
-        }
+//        guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
+//            throw DecoderConfigurationError.missingManagedObjectContext
+//        }
+//        guard let contextUserInfoKey = CodingUserInfoKey(rawValue: "context") else {fatalError()}
+//        guard let moc = decoder.userInfo[contextUserInfoKey] as? NSManagedObjectContext else {fatalError()}
+//        guard let entity = NSEntityDescription.entity(forEntityName: "Article", in: moc) else {fatalError()}
+//
+//        self.init(entity: entity, insertInto: nil)
         
-        self.init(context: context)
+        guard let context = decoder.userInfo[CodingUserInfoKey.context] as? NSManagedObjectContext else {fatalError("Couldn't get context")}
+        
+        let entity = NSEntityDescription.entity(forEntityName: "City", in: context)!
+        self.init(entity: entity, insertInto: context)
+        
+        //self.init(context: context)
         
         let query = try decoder.container(keyedBy: CodingKeys.self)
         var cities = try query.nestedUnkeyedContainer(forKey: .city)
@@ -55,3 +62,20 @@ class City: NSManagedObject, Decodable {
         self.lng = try city.decodeIfPresent(Double.self, forKey: .lng)!
     }
 }
+
+extension CodingUserInfoKey {
+    static let context = CodingUserInfoKey(rawValue: "context")!
+}
+
+extension JSONDecoder {
+    convenience init(context: NSManagedObjectContext) {
+        self.init()
+        self.userInfo[.context] = context
+    }
+}
+
+
+//let context = CoreDataStack.store.persistentContainer.newBackgroundContext() //Getting context
+//let plistDecoderForArticle = PropertyListDecoder()
+//plistDecoderForArticle.userInfo[CodingUserInfoKey.context!] = context //Pass it to CodingUserInfoKey which is made for that
+//let decodedData = try plistDecoderForArticle.decode([Article].self, from: data) //Decoding init got the managedObjectContext

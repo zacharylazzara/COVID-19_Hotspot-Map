@@ -20,6 +20,7 @@ struct ContentView: View {
 //            }
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595")
+            CovidViewModel().initializeCityData()
             summaryViewModel.fetchProvincialSummary(admin: "ON")
         }
         

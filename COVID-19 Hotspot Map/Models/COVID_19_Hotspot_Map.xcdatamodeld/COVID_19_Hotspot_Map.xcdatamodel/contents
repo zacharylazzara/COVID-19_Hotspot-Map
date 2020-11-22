@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Checkpoint" representedClassName="Checkpoint" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="nearbyCases" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="City" representedClassName=".City" syncable="YES" codeGenerationType="category">
-        <attribute name="density" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="lng" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="population" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="province" optional="YES" attributeType="String"/>
-        <attribute name="provinceId" optional="YES" attributeType="String"/>
+        <attribute name="covidCases" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="density" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lat" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lng" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="population" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="province" attributeType="String"/>
+        <attribute name="provinceId" attributeType="String"/>
     </entity>
     <elements>
         <element name="Checkpoint" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="City" positionX="-45" positionY="27" width="128" height="148"/>
+        <element name="City" positionX="-45" positionY="27" width="128" height="163"/>
     </elements>
 </model>
