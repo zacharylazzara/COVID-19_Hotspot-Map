@@ -65,7 +65,7 @@ class CovidViewModel : ObservableObject {
     // TODO: Use this one in the heatmap; it will return an array of hotspots for a given provience
     // NOTE: COVID-19 has a Re of 1.1 (effective reproduction number); it's the average number of people one person with COVID-19 will infect; we need to use this in our predictions and other data
     func predictCasesForCity(city: City) -> City {
-        var province = fetchProvincialSummary(admin: city.provinceId!)
+        let province = fetchProvincialSummary(admin: city.provinceId!)
         
         // Population Data Sources for Provinces
         // Population by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population.html
@@ -112,6 +112,9 @@ class CovidViewModel : ObservableObject {
 //
         // This is our prediction; it's fairly accurate when tested against Toronto but seems less accurate tested against Oakville; more testing and tweaking is needed
         //city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density) / provinceDensity
+        
+        
+        // TODO: the problem is the way we get our provincial numbers is async, so we end up running this before it completes
         city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density / provinceDensity!)
         return city
         //city.covidCases = city.population / province.population * province?.activeCases // This is our prediction, it seems fairly accurate!
