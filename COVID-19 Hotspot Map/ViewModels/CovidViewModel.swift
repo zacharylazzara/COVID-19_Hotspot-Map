@@ -70,7 +70,7 @@ class CovidViewModel : ObservableObject {
         // Population Data Sources for Provinces
         // Population by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population.html
         // Density by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population-density.html
-        var provincePopulationDensities = [
+        var provinceDensities = [
             "Prince Edward Island": 24.7,
             "Nova Scotia": 17.4,
             "Ontario": 14.1,
@@ -87,11 +87,11 @@ class CovidViewModel : ObservableObject {
         ]
         
         // TODO: we should build these numbers from our JSON data, as we have population numbers for each city tied to their provinces; if we sum that up we can get numbers more in line with our data (but for now this is easier)
-        var provincePopulation = [
+        var provincePopulations = [
             "Prince Edward Island": 142907,
             "Nova Scotia": 923598,
             "Ontario": 12851821,
-            "New Brunswick": ,
+            "New Brunswick": 747101,
             "Quebec": 8164361,
             "Alberta": 4067175,
             "British Columbia": 4648055,
@@ -103,18 +103,11 @@ class CovidViewModel : ObservableObject {
             "Nunavut": 35944
         ]
         
+        city.covidCases = city.population / provincePopulations[city.province] * province?.activeCases - city.density/provinceDensities[city.province]
         
-        
-        
-        
-        var provincePopulation: Int
-        
-        cities.forEach { city in
-            provincePopulation
-        }
         
         //city.covidCases = city.population / province.population * province?.activeCases // This is our prediction, it seems fairly accurate!
-        city.covidCases = city.population / province.population * province?.activeCases - city.density/province.density // more accurate predictor!
+        //city.covidCases = city.population / provincePopulations[city.province] * province?.activeCases - city.density/provinceDensities[city.province] // more accurate predictor!
         
         //city.covidCases = province?.activeCases / city.population
         
