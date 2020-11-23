@@ -96,104 +96,6 @@ class CovidViewModel : ObservableObject {
         return province
     }
     
-    
-    // TODO: Use this one in the heatmap; it will return an array of hotspots for a given provience
-    // NOTE: COVID-19 has a Re of 1.1 (effective reproduction number); it's the average number of people one person with COVID-19 will infect; we need to use this in our predictions and other data
-    func predictCasesForCity(city: City) -> City {
-        let province = fetchProvincialSummary(admin: city.provinceId!)
-        print(province)
-        // Population Data Sources for Provinces
-        // Population by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population.html
-        // Density by Province: https://www.worldatlas.com/articles/canadian-provinces-and-territories-by-population-density.html
-//        let provinceDensities = [
-//            "Prince Edward Island": 24.7,
-//            "Nova Scotia": 17.4,
-//            "Ontario": 14.1,
-//            "New Brunswick": 10.5,
-//            "Quebec": 5.8,
-//            "Alberta": 5.7,
-//            "British Columbia": 4.8,
-//            "Manitoba": 2.2,
-//            "Saskatchewan": 1.8,
-//            "Newfoundland and Labrador": 1.4,
-//            "Yukon": 0.1,
-//            "Northwest Territories": 0,
-//            "Nunavut": 0
-//        ]
-        
-        // TODO: we should build these numbers from our JSON data, as we have population numbers for each city tied to their provinces; if we sum that up we can get numbers more in line with our data (but for now this is easier)
-//        let provincePopulations = [
-//            "Prince Edward Island": 142907,
-//            "Nova Scotia": 923598,
-//            "Ontario": 12851821,
-//            "New Brunswick": 747101,
-//            "Quebec": 8164361,
-//            "Alberta": 4067175,
-//            "British Columbia": 4648055,
-//            "Manitoba": 1278365,
-//            "Saskatchewan": 1098352,
-//            "Newfoundland and Labrador": 519716,
-//            "Yukon": 35874,
-//            "Northwest Territories": 41786,
-//            "Nunavut": 35944
-//        ]
-        
-        let provincePopulation = Int64(provincePopulations[city.province!]!)
-        let provinceDensity = provinceDensities[city.province!]
-        var City = city
-        //
-        //        let provincePopulation = Int64(provincePopulations[city.province!]!)
-        //        let provinceDensity = Int64(provinceDensities[city.province!]!)
-        //
-        // This is our prediction; it's fairly accurate when tested against Toronto but seems less accurate tested against Oakville; more testing and tweaking is needed
-        //city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density) / provinceDensity
-        
-        
-        // TODO: the problem is the way we get our provincial numbers is async, so we end up running this before it completes
-        city.covidCases = city.population / provincePopulation * Int64(province!.activeCases!) - Int64(city.density / provinceDensity!)
-        return city
-        //city.covidCases = city.population / province.population * province?.activeCases // This is our prediction, it seems fairly accurate!
-        //city.covidCases = city.population / provincePopulations[city.province] * province?.activeCases - city.density/provinceDensities[city.province] // more accurate predictor!
-        
-        //city.covidCases = province?.activeCases / city.population
-        
-        
-        // TODO: probably need to get the ratio of people in Toronto vs Ontario first!!
-        
-        
-        /* TODO:
-         - Get active cases from province
-         - Get population data for province from SQL or CSV file (or another API if possible)
-         - Divide active cases among each city in the province by population
-         
-         Note: We'll probably want to take population density into account as well, as it will determine how likely any given person is to bump into someone infected
-         */
-        
-        // TODO: use this table? https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1710013501
-        //https://www12.statcan.gc.ca/wds-sdw/cpr2016-eng.cfm
-        
-        //        let cities = [City]() // TODO: we need to get city data from a database; maybe we'll do that here rather than in a model?
-        //
-        //        var hotspots = [Hotspot]()
-        
-        //        cities.forEach { city in
-        //            city.covidCases = province.activeCases / city.population // TODO: tie density into this, maybe multiply by density?
-        //
-        //
-        ////            var hotspot = Hotspot()
-        ////            hotspot.predictedCases = province.activeCases / city.population
-        ////            hotspots.append(hotspot)
-        //        }
-        
-        
-        // TODO: we'll figure out which city we're closest to using the latlng of the city and our current latlng?
-        // Maybe we should save the predicted numbers to the City entity so we don't need to retrieve them so often!
-        
-        
-        //return [Hotspot]()
-    }
-    
-    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "COVID_19_Hotspot_Map")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -204,10 +106,6 @@ class CovidViewModel : ObservableObject {
         return container
     }()
     
-    
-    
-    
-    // TODO: we should get the case counts from the province when we initialize the data
     func initializeCityData() {
         do {
             if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
@@ -219,59 +117,63 @@ class CovidViewModel : ObservableObject {
                 // TODO: does it save automatically? or do we need to save it ourselves?
                 
                 self.cities = try decoder.decode([City].self, from: data)
-                print(self.cities)
+                //print(self.cities)
                 
-                let provincePopulation = Int64(provincePopulations[city.province!]!)
-                let provinceDensity = provinceDensities[city.province!]
                 
-//                    let provincialSummary = "/summary?loc=\(city.provinceId!)/"
+                
                 let provincialSummary = "/summary?prov/"
                 guard let apiURL = URL(string: apiURLString + provincialSummary) else {
                     print(#function, "Problem with API URL:\n\n\(apiURLString + provincialSummary)\n\n")
                     return
                 }
-                
-                
-                // I think we need to remove this or we're gonna flood the API / take a long time to load data; we only need to load API once
-                cities.forEach { city in
-                    
-                    
-                    // TODO: is this fetching data? it returns nil but it shouldn't be. Maybe we should just get the data from elsewhere, or return in the thread?
-                    
-                    URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
-                        if let e = error {
-                            print(#function, "Error \(e.localizedDescription)")
-                        } else {
-                            DispatchQueue.global().async {
-                                do {
-                                    if let jsonData = data {
-                                        let decoder = JSONDecoder()
-                                        // TODO: province should be an array now!!!
-                                        let decodedSummary = try decoder.decode(Province.self, from: jsonData)
-                                        DispatchQueue.main.async {
-                                            // TODO: data not formatted right??
-                                            // TODO: do our province calculations here and put them in the city
+                URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
+                    if let e = error {
+                        print(#function, "Error \(e.localizedDescription)")
+                    } else {
+                        DispatchQueue.global().async {
+                            do {
+                                if let jsonData = data {
+                                    let decoder = JSONDecoder()
+                                    // TODO: province should be an array now!!!
+                                    let decodedSummary = try decoder.decode(ProvincialSummary.self, from: jsonData)
+                                    
+                                    
+                                    DispatchQueue.main.async {
+                                        // TODO: data not formatted right??
+                                        // TODO: do our province calculations here and put them in the city
+                                        
+                                        // TODO: am I being rate limited? maybe we should fetch all this data ahead of time THEN tie it into the cities!! i.e., no foreach city; we just need data on all provinces
+                                        
+                                        // TODO: maybe we should do this at the same time as initializing the city? perhaps we can have the city model itself call the API?
+                                        self.cities.forEach { city in
+                                            let province = decodedSummary.provinces[city.province!]
                                             
-                                            // TODO: am I being rate limited? maybe we should fetch all this data ahead of time THEN tie it into the cities!! i.e., no foreach city; we just need data on all provinces
+                                            let provincePopulation = Int64(self.provincePopulations[city.province!]!)
+                                            //let provinceDensity = self.provinceDensities[city.province!]
                                             
-                                            // TODO: maybe we should do this at the same time as initializing the city? perhaps we can have the city model itself call the API?
+                                            // TODO: this prediction should take population density and the virus's rate of spread into account, but for now this will do
+                                            city.covidCases = Int64(
+                                                Double(city.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0)
+                                            )
                                             
-                                            city.covidCases = city.population / provincePopulation * Int64(decodedSummary.activeCases!) - Int64(city.density / provinceDensity!)
+                                            //- Int64(city.density / (provinceDensity! > 0 ? provinceDensity! : 1))
                                             
-                                            print(city.covidCases)
+                                            //print("City: \(city.name) Cases: \(city.covidCases)\n")
+                                            
                                         }
-                                    } else {
-                                        print(#function, "JSON data is empty")
+                                        
                                     }
-                                } catch let error {
-                                    print(#function, "Error decoding data: \(error)")
+                                } else {
+                                    print(#function, "JSON data is empty")
                                 }
+                            } catch let error {
+                                print(#function, "Error decoding data: \(error)")
                             }
                         }
-                    }.resume()
-                    
-                }
+                    }
+                }.resume()
                 
+                // TODO: save cities to database?
                 //print(self.cities)
                 //                do {
                 //                    try self.persistentContainer.viewContext.save()

@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Province: \(city?.province ?? "unavailable")")
-            Text("Active Provincial Cases: \(summaryViewModel.province.activeCases ?? -1)")
+           // Text("Active Provincial Cases: \(summaryViewModel.province.activeCases ?? -1)")
             Text("City: \(city?.name ?? "unavailable")")
             Text("Cases: \(city?.covidCases ?? -1)")
             

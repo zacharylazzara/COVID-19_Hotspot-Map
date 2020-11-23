@@ -20,8 +20,8 @@ class SummaryViewModel : ObservableObject {
     // TOOD: use this API for health regions?
     //https://services1.arcgis.com/B6yKvIZqzuOr0jBR/arcgis/rest/services/Health_Regions_in_Canada/FeatureServer/0/query?where=1%3D1&outFields=HR_UID,ENGNAME,FID&returnGeometry=false&returnDistinctValues=true&outSR=4326&f=json
     
-    @Published var summary = Summary()
-    @Published var province = Province()
+    @Published var summary = HealthRegionSummary()
+    //@Published var province = Province()
     private var location: LocationManager
     private var apiURLString: String
     
@@ -45,7 +45,7 @@ class SummaryViewModel : ObservableObject {
                     do {
                         if let jsonData = data {
                             let decoder = JSONDecoder()
-                            let decodedSummary = try decoder.decode(Summary.self, from: jsonData)
+                            let decodedSummary = try decoder.decode(HealthRegionSummary.self, from: jsonData)
                             DispatchQueue.main.async {
                                 self.summary = decodedSummary
                                 print(#function, "COVID-19 Summary: \(self.summary)")
@@ -82,7 +82,7 @@ class SummaryViewModel : ObservableObject {
                     do {
                         if let jsonData = data {
                             let decoder = JSONDecoder()
-                            let decodedSummary = try decoder.decode(Summary.self, from: jsonData)
+                            let decodedSummary = try decoder.decode(HealthRegionSummary.self, from: jsonData)
                             DispatchQueue.main.async {
                                 self.summary = decodedSummary
                                 print(#function, "COVID-19 Summary: \(self.summary)")
@@ -117,8 +117,8 @@ class SummaryViewModel : ObservableObject {
                             let decoder = JSONDecoder()
                             let decodedSummary = try decoder.decode(Province.self, from: jsonData)
                             DispatchQueue.main.async {
-                                self.province = decodedSummary
-                                print(#function, "COVID-19 Summary: \(self.province)")
+                                //self.province = decodedSummary
+                                //print(#function, "COVID-19 Summary: \(self.province)")
                             }
                         } else {
                             print(#function, "JSON data is empty")

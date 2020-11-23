@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Region: Hashable {
+struct HealthRegion: Hashable {
     var province: String
     var healthRegion: String
     var cases: Int

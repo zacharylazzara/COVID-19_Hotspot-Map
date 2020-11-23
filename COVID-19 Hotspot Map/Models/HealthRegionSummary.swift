@@ -1,5 +1,5 @@
 //
-//  Summary.swift
+//  HealthRegionSummary.swift
 //  COVID-19 Hotspot Map
 //
 //  Created by Zachary Lazzara on 2020-11-21.
@@ -8,7 +8,7 @@
 import Foundation
 
 struct HealthRegionSummary : Decodable {
-    var regions = [Region]()
+    var regions = [HealthRegion]()
     
     init() {}
     
@@ -32,7 +32,7 @@ struct HealthRegionSummary : Decodable {
         
         while(!summary.isAtEnd) {
             let regionSummary = try summary.nestedContainer(keyedBy: CodingKeys.self)
-            let region = Region(
+            let region = HealthRegion(
                 province: try regionSummary.decodeIfPresent(String.self, forKey: .province)!,
                 healthRegion: try regionSummary.decodeIfPresent(String.self, forKey: .healthRegion)!,
                 cases: try regionSummary.decodeIfPresent(Int.self, forKey: .cases)!,
