@@ -16,9 +16,8 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Province: \(city?.province ?? "unavailable")")
-           // Text("Active Provincial Cases: \(summaryViewModel.province.activeCases ?? -1)")
-            Text("City: \(city?.name ?? "unavailable")")
+            Text("Active Provincial Cases: \(city?.provinceCases ?? -1)")
+            Text("\(city?.name ?? "unavailable"), \(city?.province ?? "unavailable")")
             Text("Cases: \(city?.covidCases ?? -1)")
             
 //            ForEach(summaryViewModel.summary.regions, id: \.self) { region in

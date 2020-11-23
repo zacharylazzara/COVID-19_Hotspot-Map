@@ -14,10 +14,11 @@
         <attribute name="name" attributeType="String"/>
         <attribute name="population" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="province" attributeType="String"/>
+        <attribute name="provinceCases" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="provinceId" attributeType="String"/>
     </entity>
     <elements>
         <element name="Checkpoint" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="City" positionX="-45" positionY="27" width="128" height="163"/>
+        <element name="City" positionX="-45" positionY="27" width="128" height="178"/>
     </elements>
 </model>

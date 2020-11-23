@@ -148,6 +148,7 @@ class CovidViewModel : ObservableObject {
                     decodedCities.forEach { city in
                         let province = decodedProvincialSummary!.provinces[city.province!]
                         let provincePopulation = Int64(self.provincePopulations[city.province!]!)
+                        city.provinceCases = Int64(province?.activeCases ?? 0)
                         
                         // NOTE: This is the prediction; we can tweak this to make the predictions better
                         city.covidCases = Int64(
