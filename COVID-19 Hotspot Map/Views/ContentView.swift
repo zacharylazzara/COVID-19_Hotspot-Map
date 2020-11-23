@@ -28,14 +28,14 @@ struct ContentView: View {
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595") // TODO: if we can get health region codes we can use this
             covidViewModel.initializeCityData()
-            
+            //city = covidViewModel.cities[0]
             
 //            covidViewModel.cities.forEach { city in
 //                print(city)
 //            }
             
             //city = covidViewModel.predictCasesForCity(city: covidViewModel.cities[0])
-            summaryViewModel.fetchProvincialSummary(admin: covidViewModel.cities[0].provinceId!)
+            //summaryViewModel.fetchProvincialSummary(admin: covidViewModel.cities[0].provinceId!)
             //var city2 = covidViewModel.predictCasesForCity(city: city)
             
            // print(city2)

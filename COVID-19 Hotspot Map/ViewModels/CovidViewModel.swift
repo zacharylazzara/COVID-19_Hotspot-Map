@@ -110,15 +110,14 @@ class CovidViewModel : ObservableObject {
         do {
             if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
                 let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
+                let cityDecoder = JSONDecoder()
                 
-                decoder.userInfo[CodingUserInfoKey.context!] = self.persistentContainer.viewContext
+                cityDecoder.userInfo[CodingUserInfoKey.context!] = self.persistentContainer.viewContext
                 
-                // TODO: does it save automatically? or do we need to save it ourselves?
+                // TODO: does it save to CoreData automatically? or do we need to save it ourselves?
                 
-                self.cities = try decoder.decode([City].self, from: data)
-                //print(self.cities)
-                
+                //self.cities = try cityDecoder.decode([City].self, from: data)
+                var decodedCities = try cityDecoder.decode([City].self, from: data)
                 
                 
                 let provincialSummary = "/summary?prov/"
@@ -128,14 +127,14 @@ class CovidViewModel : ObservableObject {
                 }
                 URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
                     if let e = error {
-                        print(#function, "Error \(e.localizedDescription)")
+                        print(#function, "Error \(e)")
                     } else {
                         DispatchQueue.global().async {
                             do {
                                 if let jsonData = data {
-                                    let decoder = JSONDecoder()
+                                    let provincialSummaryDecoder = JSONDecoder()
                                     // TODO: province should be an array now!!!
-                                    let decodedSummary = try decoder.decode(ProvincialSummary.self, from: jsonData)
+                                    let decodedProvincialSummary = try provincialSummaryDecoder.decode(ProvincialSummary.self, from: jsonData)
                                     
                                     
                                     DispatchQueue.main.async {
@@ -145,8 +144,8 @@ class CovidViewModel : ObservableObject {
                                         // TODO: am I being rate limited? maybe we should fetch all this data ahead of time THEN tie it into the cities!! i.e., no foreach city; we just need data on all provinces
                                         
                                         // TODO: maybe we should do this at the same time as initializing the city? perhaps we can have the city model itself call the API?
-                                        self.cities.forEach { city in
-                                            let province = decodedSummary.provinces[city.province!]
+                                        decodedCities.forEach { city in
+                                            let province = decodedProvincialSummary.provinces[city.province!]
                                             
                                             let provincePopulation = Int64(self.provincePopulations[city.province!]!)
                                             //let provinceDensity = self.provinceDensities[city.province!]
@@ -156,11 +155,14 @@ class CovidViewModel : ObservableObject {
                                                 Double(city.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0)
                                             )
                                             
+                                            print("Predicted cases for \(city.name): \(city.covidCases)")
                                             //- Int64(city.density / (provinceDensity! > 0 ? provinceDensity! : 1))
                                             
                                             //print("City: \(city.name) Cases: \(city.covidCases)\n")
                                             
                                         }
+                                        // TODO: since this all runs async we're having some problems getting the variables out
+                                        self.cities = decodedCities
                                         
                                     }
                                 } else {
