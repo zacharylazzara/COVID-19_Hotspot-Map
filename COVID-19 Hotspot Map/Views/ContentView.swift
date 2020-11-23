@@ -34,7 +34,7 @@ struct ContentView: View {
 //                print(city)
 //            }
             
-            city = covidViewModel.predictCasesForCity(city: covidViewModel.cities[0])
+            //city = covidViewModel.predictCasesForCity(city: covidViewModel.cities[0])
             summaryViewModel.fetchProvincialSummary(admin: covidViewModel.cities[0].provinceId!)
             //var city2 = covidViewModel.predictCasesForCity(city: city)
             
