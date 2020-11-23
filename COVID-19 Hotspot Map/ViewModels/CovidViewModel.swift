@@ -8,9 +8,24 @@
 import Foundation
 import CoreData
 
+// TODO: we should pull data from CoreData on initialize if it already exists, otherwise we load from JSON file
+
 class CovidViewModel : ObservableObject {
     private var apiURLString = "https://api.opencovid.ca/"
-    @Published public var cities = [City]()
+    //@Published public var cities = [City]()
+    @Published public var localities:[String:City] = [:] // TODO: make private and implement a getter
+    @Published public var locality: City? // TODO: make private and implement a getter/setter
+    
+    func setLocality(loc: String) {
+        // TODO: call location manager to find where we are
+        // TODO: maybe we need both province and location just in case we have non-unique city names?
+        
+        // TODO: get locality from placemarks to figure out where we are
+        // TODO: maybe we want to store cities as a dictionary instead of an array? that way we can easily access the relevant data
+        locality = localities[loc]!
+    }
+    
+    // TODO: we'll probably use densities (for the city not province) to determine probability of infection (it will determine danger score)
     
     public let provinceDensities = [
         "Prince Edward Island": 24.7,
@@ -44,7 +59,7 @@ class CovidViewModel : ObservableObject {
         "Nunavut": 35944
     ]
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "COVID_19_Hotspot_Map")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -102,11 +117,13 @@ class CovidViewModel : ObservableObject {
                         city.covidCases = Int64(
                             Double(city.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0)
                         )
+                        
+                        self.localities[city.name!] = city
                     }
-                    self.cities = decodedCities
+                    //self.cities = decodedCities
                 }
                 
-                // TODO: Do we need to save cities to the database or is it automatic? Also, we should make we overwrite data with updated date if it already exists
+                // TODO: Do we need to save cities to the database or is it automatic? Also, we should make sure we overwrite data with updated date if it already exists
 //                print(self.cities)
 //                do {
 //                    try self.persistentContainer.viewContext.save()

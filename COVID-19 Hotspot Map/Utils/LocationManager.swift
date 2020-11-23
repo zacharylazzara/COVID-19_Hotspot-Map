@@ -11,7 +11,7 @@ import Foundation
 import CoreLocation
 
 protocol LocationDelegate {
-    func fetchRegionalSummary(admin: String, loc: String)
+    func setLocality(loc: String)
 }
 
 class LocationManager: NSObject {
@@ -81,7 +81,7 @@ extension LocationManager: CLLocationManagerDelegate {
             
             print(#function, "Loc: \(loc ?? ""), Admin: \(admin ?? "")")
             
-            self.delegate?.fetchRegionalSummary(admin: admin ?? "unavailable", loc: loc ?? "unavailable")
+            self.delegate?.setLocality(loc: loc ?? "unavailable")
         })
     }
 }

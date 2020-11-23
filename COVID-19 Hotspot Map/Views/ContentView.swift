@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// TODO: in order to figure out our locality, we can just match locality with city, and failing that, we can use longitude and latitude
+
 struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
     
@@ -15,9 +17,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Active Provincial Cases: \(city?.provinceCases ?? -1)")
             Text("\(city?.name ?? "unavailable"), \(city?.province ?? "unavailable")")
-            Text("Cases: \(city?.covidCases ?? -1)")
+            Text("Active Provincial Cases: \(city?.provinceCases ?? -1)")
+            Text("Active Local Cases: \(city?.covidCases ?? -1)")
             
 //            ForEach(summaryViewModel.summary.regions, id: \.self) { region in
 //                Text("Province: \(region.province)")
@@ -26,7 +28,9 @@ struct ContentView: View {
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595") // TODO: if we can get health region codes we can use this
             covidViewModel.initializeCityData().notify(queue: .main) {
-                city = covidViewModel.cities[0]
+                //city = covidViewModel.localities["Toronto"]
+                covidViewModel.setLocality(loc: "Toronto")
+                city = covidViewModel.locality
             }
             
         
