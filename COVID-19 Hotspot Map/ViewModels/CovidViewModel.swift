@@ -10,11 +10,19 @@ import CoreData
 
 // TODO: we should pull data from CoreData on initialize if it already exists, otherwise we load from JSON file
 
-class CovidViewModel : ObservableObject {
+class CovidViewModel : ObservableObject, LocationDelegate {
     private var apiURLString = "https://api.opencovid.ca/"
+    private var location: LocationManager
     //@Published public var cities = [City]()
     @Published public var localities:[String:City] = [:] // TODO: make private and implement a getter
     @Published public var locality: City? // TODO: make private and implement a getter/setter
+    
+    init() {
+        location = LocationManager()
+        initializeCityData().notify(queue: .main) {
+            self.location.delegate = self
+        }
+    }
     
     func setLocality(loc: String) {
         // TODO: call location manager to find where we are
@@ -22,7 +30,9 @@ class CovidViewModel : ObservableObject {
         
         // TODO: get locality from placemarks to figure out where we are
         // TODO: maybe we want to store cities as a dictionary instead of an array? that way we can easily access the relevant data
-        locality = localities[loc]!
+        //print(loc)
+        locality = localities[loc] ?? nil
+        //print(locality)
     }
     
     // TODO: we'll probably use densities (for the city not province) to determine probability of infection (it will determine danger score)

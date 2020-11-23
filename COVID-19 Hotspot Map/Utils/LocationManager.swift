@@ -5,7 +5,7 @@
 //  Created by Zachary Lazzara on 2020-11-21.
 //
 
-// Toronto: 43.6532° N, 79.3832° W
+// Toronto Coordinates: 43.6532, -79.3832
 
 import Foundation
 import CoreLocation
@@ -70,7 +70,7 @@ extension LocationManager: CLLocationManagerDelegate {
         lat = (manager.location?.coordinate.latitude)
         lng = (manager.location?.coordinate.longitude)
         
-        print(#function, "Lat: \(lat ?? 0), Lng: \(lng ?? 0)")
+        
         
         let geoCoder = CLGeocoder()
         let location = CLLocation(latitude: lat ?? 0, longitude: lng ?? 0)
@@ -79,7 +79,9 @@ extension LocationManager: CLLocationManagerDelegate {
             let loc = placemarks?[0].locality // City
             let admin = placemarks?[0].administrativeArea // Province
             
+            print(#function, "Lat: \(lat ?? 0), Lng: \(lng ?? 0)")
             print(#function, "Loc: \(loc ?? ""), Admin: \(admin ?? "")")
+            print(#function, "Placemarks: \(placemarks)")
             
             self.delegate?.setLocality(loc: loc ?? "unavailable")
         })

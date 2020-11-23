@@ -12,14 +12,14 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
     
-    @State var city: City?
-    @State var cities = [City]()
+//    @State var city: City?
+//    @State var cities = [City]()
     
     var body: some View {
         VStack {
-            Text("\(city?.name ?? "unavailable"), \(city?.province ?? "unavailable")")
-            Text("Active Provincial Cases: \(city?.provinceCases ?? -1)")
-            Text("Active Local Cases: \(city?.covidCases ?? -1)")
+            Text("\(covidViewModel.locality?.name ?? "unavailable"), \(covidViewModel.locality?.province ?? "unavailable")")
+            Text("Active Provincial Cases: \(covidViewModel.locality?.provinceCases ?? -1)")
+            Text("Active Local Cases: \(covidViewModel.locality?.covidCases ?? -1)")
             
 //            ForEach(summaryViewModel.summary.regions, id: \.self) { region in
 //                Text("Province: \(region.province)")
@@ -27,13 +27,13 @@ struct ContentView: View {
 //            }
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595") // TODO: if we can get health region codes we can use this
-            covidViewModel.initializeCityData().notify(queue: .main) {
-                //city = covidViewModel.localities["Toronto"]
-                covidViewModel.setLocality(loc: "Toronto")
-                city = covidViewModel.locality
-            }
-            
-        
+//            covidViewModel.initializeCityData().notify(queue: .main) {
+//                //city = covidViewModel.localities["Toronto"]
+//                //covidViewModel.setLocality(loc: "Toronto")
+//                //city = covidViewModel.locality
+//            }
+            //covidViewModel.setLocality(loc: "Toronto")
+            //city = covidViewModel.locality
             
             // TODO: still not waiting
            //city = covidViewModel.cities[0]
