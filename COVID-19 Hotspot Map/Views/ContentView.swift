@@ -12,7 +12,7 @@ struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
     
     @State var city: City?
-    
+    @State var cities = [City]()
     
     var body: some View {
         VStack {
@@ -28,8 +28,14 @@ struct ContentView: View {
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595") // TODO: if we can get health region codes we can use this
             covidViewModel.initializeCityData()
-            //city = covidViewModel.cities[0]
             
+            covidViewModel.group.notify(queue: .main) {
+                city = covidViewModel.cities[0]
+            }
+            
+            // TODO: still not waiting
+           //city = covidViewModel.cities[0]
+            //city = cities[0]
 //            covidViewModel.cities.forEach { city in
 //                print(city)
 //            }

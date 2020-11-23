@@ -106,7 +106,30 @@ class CovidViewModel : ObservableObject {
         return container
     }()
     
+    
+    
+    
+    
+    public let group = DispatchGroup()
+    
+    func getAllCityData() -> [City] {
+        group.wait()
+        return self.cities
+    }
+    
+    
+    
+    
+    
     func initializeCityData() {
+        //let semaphore = DispatchSemaphore(value: 0)
+        
+        
+        //let group = DispatchGroup() // TODO: why isn't gorup waiting???
+        //https://stackoverflow.com/questions/47041491/swift-wait-for-closure-thread-to-finish
+        
+        
+        //group.enter()
         do {
             if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
                 let data = try Data(contentsOf: url)
@@ -125,56 +148,56 @@ class CovidViewModel : ObservableObject {
                     print(#function, "Problem with API URL:\n\n\(apiURLString + provincialSummary)\n\n")
                     return
                 }
-                URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
-                    if let e = error {
-                        print(#function, "Error \(e)")
-                    } else {
-                        DispatchQueue.global().async {
+                
+                
+                
+                // TODO: URLSesion is causing problems with our async stuff; if we wait for this we never get to queue, but if we don't then queue runs too late and we dont wait for it
+                
+                DispatchQueue.main.async {
+                    var decodedProvincialSummary: ProvincialSummary?
+                    
+                    self.group.enter()
+                    URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
+                        if let e = error {
+                            print(#function, "Error \(e)")
+                        } else {
                             do {
                                 if let jsonData = data {
                                     let provincialSummaryDecoder = JSONDecoder()
-                                    // TODO: province should be an array now!!!
-                                    let decodedProvincialSummary = try provincialSummaryDecoder.decode(ProvincialSummary.self, from: jsonData)
-                                    
-                                    
-                                    DispatchQueue.main.async {
-                                        // TODO: data not formatted right??
-                                        // TODO: do our province calculations here and put them in the city
-                                        
-                                        // TODO: am I being rate limited? maybe we should fetch all this data ahead of time THEN tie it into the cities!! i.e., no foreach city; we just need data on all provinces
-                                        
-                                        // TODO: maybe we should do this at the same time as initializing the city? perhaps we can have the city model itself call the API?
-                                        decodedCities.forEach { city in
-                                            let province = decodedProvincialSummary.provinces[city.province!]
-                                            
-                                            let provincePopulation = Int64(self.provincePopulations[city.province!]!)
-                                            //let provinceDensity = self.provinceDensities[city.province!]
-                                            
-                                            // TODO: this prediction should take population density and the virus's rate of spread into account, but for now this will do
-                                            city.covidCases = Int64(
-                                                Double(city.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0)
-                                            )
-                                            
-                                            print("Predicted cases for \(city.name): \(city.covidCases)")
-                                            //- Int64(city.density / (provinceDensity! > 0 ? provinceDensity! : 1))
-                                            
-                                            //print("City: \(city.name) Cases: \(city.covidCases)\n")
-                                            
-                                        }
-                                        // TODO: since this all runs async we're having some problems getting the variables out
-                                        self.cities = decodedCities
-                                        
-                                    }
+                                    decodedProvincialSummary = try provincialSummaryDecoder.decode(ProvincialSummary.self, from: jsonData)
                                 } else {
                                     print(#function, "JSON data is empty")
                                 }
                             } catch let error {
                                 print(#function, "Error decoding data: \(error)")
                             }
+                            self.group.leave()
                         }
+                    }.resume()
+                    self.group.wait()
+                    decodedCities.forEach { city in
+                        let province = decodedProvincialSummary!.provinces[city.province!]
+                        
+                        let provincePopulation = Int64(self.provincePopulations[city.province!]!)
+                        //let provinceDensity = self.provinceDensities[city.province!]
+                        
+                        // TODO: this prediction should take population density and the virus's rate of spread into account, but for now this will do
+                        
+                        // TODO: make sure this actually mutates the object and saves it in the array
+                        city.covidCases = Int64(
+                            Double(city.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0)
+                        )
+                        
+                        //print("Predicted cases for \(city.name): \(city.covidCases)")
+                        //- Int64(city.density / (provinceDensity! > 0 ? provinceDensity! : 1))
+                        
+                        //print("City: \(city.name) Cases: \(city.covidCases)\n")
+                        //print(city)
                     }
-                }.resume()
-                
+                    // TODO: since this all runs async we're having some problems getting the variables out
+                    
+                    self.cities = decodedCities
+                }
                 // TODO: save cities to database?
                 //print(self.cities)
                 //                do {
@@ -187,6 +210,11 @@ class CovidViewModel : ObservableObject {
             }
         } catch let error {
             print(#function, "Error decoding data: \(error)")
+        }
+        
+        group.notify(queue: .main) {
+            print(#function, "Data initialized")
+            //print(self.cities[0])
         }
     }
 }
