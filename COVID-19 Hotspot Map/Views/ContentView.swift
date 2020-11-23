@@ -27,11 +27,11 @@ struct ContentView: View {
 //            }
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595") // TODO: if we can get health region codes we can use this
-            covidViewModel.initializeCityData()
-            
-            covidViewModel.group.notify(queue: .main) {
+            covidViewModel.initializeCityData().notify(queue: .main) {
                 city = covidViewModel.cities[0]
             }
+            
+        
             
             // TODO: still not waiting
            //city = covidViewModel.cities[0]

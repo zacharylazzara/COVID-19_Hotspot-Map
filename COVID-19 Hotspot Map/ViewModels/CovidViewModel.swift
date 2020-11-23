@@ -106,57 +106,27 @@ class CovidViewModel : ObservableObject {
         return container
     }()
     
-    
-    
-    
-    
-    public let group = DispatchGroup()
-    
-    func getAllCityData() -> [City] {
-        group.wait()
-        return self.cities
-    }
-    
-    
-    
-    
-    
-    func initializeCityData() {
-        //let semaphore = DispatchSemaphore(value: 0)
+    func initializeCityData() -> DispatchGroup {
+        let group = DispatchGroup()
         
-        
-        //let group = DispatchGroup() // TODO: why isn't gorup waiting???
-        //https://stackoverflow.com/questions/47041491/swift-wait-for-closure-thread-to-finish
-        
-        
-        //group.enter()
         do {
             if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
                 let data = try Data(contentsOf: url)
                 let cityDecoder = JSONDecoder()
                 
                 cityDecoder.userInfo[CodingUserInfoKey.context!] = self.persistentContainer.viewContext
-                
-                // TODO: does it save to CoreData automatically? or do we need to save it ourselves?
-                
-                //self.cities = try cityDecoder.decode([City].self, from: data)
-                var decodedCities = try cityDecoder.decode([City].self, from: data)
-                
+                let decodedCities = try cityDecoder.decode([City].self, from: data)
                 
                 let provincialSummary = "/summary?prov/"
                 guard let apiURL = URL(string: apiURLString + provincialSummary) else {
                     print(#function, "Problem with API URL:\n\n\(apiURLString + provincialSummary)\n\n")
-                    return
+                    return group
                 }
-                
-                
-                
-                // TODO: URLSesion is causing problems with our async stuff; if we wait for this we never get to queue, but if we don't then queue runs too late and we dont wait for it
                 
                 DispatchQueue.main.async {
                     var decodedProvincialSummary: ProvincialSummary?
                     
-                    self.group.enter()
+                    group.enter()
                     URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
                         if let e = error {
                             print(#function, "Error \(e)")
@@ -171,40 +141,30 @@ class CovidViewModel : ObservableObject {
                             } catch let error {
                                 print(#function, "Error decoding data: \(error)")
                             }
-                            self.group.leave()
+                            group.leave()
                         }
                     }.resume()
-                    self.group.wait()
+                    group.wait()
                     decodedCities.forEach { city in
                         let province = decodedProvincialSummary!.provinces[city.province!]
-                        
                         let provincePopulation = Int64(self.provincePopulations[city.province!]!)
-                        //let provinceDensity = self.provinceDensities[city.province!]
                         
-                        // TODO: this prediction should take population density and the virus's rate of spread into account, but for now this will do
-                        
-                        // TODO: make sure this actually mutates the object and saves it in the array
+                        // NOTE: This is the prediction; we can tweak this to make the predictions better
                         city.covidCases = Int64(
                             Double(city.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0)
                         )
-                        
-                        //print("Predicted cases for \(city.name): \(city.covidCases)")
-                        //- Int64(city.density / (provinceDensity! > 0 ? provinceDensity! : 1))
-                        
-                        //print("City: \(city.name) Cases: \(city.covidCases)\n")
-                        //print(city)
                     }
-                    // TODO: since this all runs async we're having some problems getting the variables out
-                    
                     self.cities = decodedCities
                 }
-                // TODO: save cities to database?
-                //print(self.cities)
-                //                do {
-                //                    try self.persistentContainer.viewContext.save()
-                //                } catch {
-                //                    print(error)
-                //                }
+                
+                // TODO: Do we need to save cities to the database or is it automatic? Also, we should make we overwrite data with updated date if it already exists
+//                print(self.cities)
+//                do {
+//                    try self.persistentContainer.viewContext.save()
+//                } catch {
+//                    print(error)
+//                }
+                
             } else {
                 print(#function, "JSON data is empty")
             }
@@ -214,7 +174,8 @@ class CovidViewModel : ObservableObject {
         
         group.notify(queue: .main) {
             print(#function, "Data initialized")
-            //print(self.cities[0])
         }
+        
+        return group
     }
 }
