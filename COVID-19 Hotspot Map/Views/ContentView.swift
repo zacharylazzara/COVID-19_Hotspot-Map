@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var summaryViewModel: SummaryViewModel
     @EnvironmentObject var covidViewModel: CovidViewModel
     
     @State var city: City?

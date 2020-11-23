@@ -14,7 +14,6 @@
 		B638722F2569879E00174C71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B638722E2569879E00174C71 /* Assets.xcassets */; };
 		B63872322569879E00174C71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B63872312569879E00174C71 /* Preview Assets.xcassets */; };
 		B63872352569879E00174C71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B63872332569879E00174C71 /* LaunchScreen.storyboard */; };
-		B6387241256987D200174C71 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6387240256987D200174C71 /* SummaryViewModel.swift */; };
 		B6387245256987EE00174C71 /* HealthRegionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6387244256987EE00174C71 /* HealthRegionSummary.swift */; };
 		B63872492569887100174C71 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63872482569887100174C71 /* LocationManager.swift */; };
 		B638724D2569982D00174C71 /* HealthRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638724C2569982D00174C71 /* HealthRegion.swift */; };
@@ -36,7 +35,6 @@
 		B63872312569879E00174C71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B63872342569879E00174C71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B63872362569879E00174C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B6387240256987D200174C71 /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		B6387244256987EE00174C71 /* HealthRegionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRegionSummary.swift; sourceTree = "<group>"; };
 		B63872482569887100174C71 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B638724C2569982D00174C71 /* HealthRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRegion.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 		B638723F256987B300174C71 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B6387240256987D200174C71 /* SummaryViewModel.swift */,
 				B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */,
 			);
 			path = ViewModels;
@@ -213,7 +210,6 @@
 			files = (
 				B67DCF2D2569BCB200A3DBA6 /* CovidViewModel.swift in Sources */,
 				B638722D2569879C00174C71 /* COVID_19_Hotspot_Map.xcdatamodeld in Sources */,
-				B6387241256987D200174C71 /* SummaryViewModel.swift in Sources */,
 				B63872262569879C00174C71 /* AppDelegate.swift in Sources */,
 				B67DCF6A256C0E9600A3DBA6 /* ProvincialSummary.swift in Sources */,
 				B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */,
