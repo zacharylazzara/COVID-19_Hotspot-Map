@@ -17,14 +17,21 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("\(covidViewModel.locality?.name ?? "unavailable"), \(covidViewModel.locality?.province ?? "unavailable")")
-            Text("Active Provincial Cases: \(covidViewModel.locality?.provinceCases ?? -1)")
-            Text("Active Local Cases: \(covidViewModel.locality?.covidCases ?? -1)")
+            Text("\(covidViewModel.getLocality()?.name ?? "unavailable"), \(covidViewModel.getLocality()?.province ?? "unavailable")")
+            Text("Active Provincial Cases: \(covidViewModel.getLocality()?.provinceCases ?? -1)")
+            Text("Active Local Cases: \(covidViewModel.getLocality()?.covidCases ?? -1)")
             
 //            ForEach(summaryViewModel.summary.regions, id: \.self) { region in
 //                Text("Province: \(region.province)")
 //                Text("New Cases: \(region.cases)")
 //            }
+            
+            
+            
+            // TODO: we need to show the probability of catching COVID-19; we'll need to use the average spread rate as well as the population density for the locality
+            
+            
+            Spacer()
         }.onAppear {
             //summaryViewModel.fetchRegionalSummary(admin: "ON", loc: "3595") // TODO: if we can get health region codes we can use this
 //            covidViewModel.initializeCityData().notify(queue: .main) {
