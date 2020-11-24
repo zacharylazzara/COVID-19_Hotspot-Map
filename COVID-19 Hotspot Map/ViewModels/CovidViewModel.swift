@@ -8,6 +8,10 @@
 import Foundation
 import CoreData
 
+// TODO: some locations aren't getting data, such as Vancouver (must be a problem matching the strings?)
+
+
+
 // TODO: we should pull data from CoreData on initialize if it already exists, otherwise we load from JSON file
 
 class CovidViewModel : ObservableObject, LocationDelegate {
