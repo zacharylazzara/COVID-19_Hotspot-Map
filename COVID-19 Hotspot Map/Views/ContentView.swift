@@ -40,7 +40,7 @@ struct ContentView: View {
                         destination: ProvincialSummaryView(),
                         label: {
                             Text("\(Image(systemName: "waveform.path.ecg"))\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.riskScore ?? -1))")
-                        })
+                        }).foregroundColor(.red) // TODO: we should colour code this based on how it compares to all other regions
                 },
                 trailing: HStack {
                     // TODO: we should probably put a menu here and have the leaderboard and settings accessible via the hamburger menu, as these are unlikely to be accessed as frequently by the user
