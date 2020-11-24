@@ -47,7 +47,7 @@ struct ContentView: View {
                     NavigationLink(
                         destination: LeaderboardView(),
                         label: {
-                            Image(systemName: "thermometer")
+                            Image(systemName: "list.number")
                         })
                     
                 })
