@@ -10,7 +10,7 @@ import CoreData
 
 // TODO: some locations aren't getting data, such as Vancouver (must be a problem matching the strings?)
 
-
+// TODO: we need to display cases on the map, associated with their pin marks (we should use custom pin marks)
 
 // TODO: we should pull data from CoreData on initialize if it already exists, otherwise we load from JSON file
 

@@ -22,6 +22,7 @@
 		B67DCF6A256C0E9600A3DBA6 /* ProvincialSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF69256C0E9600A3DBA6 /* ProvincialSummary.swift */; };
 		B67DCFBF256D097A00A3DBA6 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCFBE256D097A00A3DBA6 /* LeaderboardView.swift */; };
 		B67DCFC2256D13A700A3DBA6 /* ProvincialSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCFC1256D13A700A3DBA6 /* ProvincialSummaryView.swift */; };
+		B67DCFC5256D454C00A3DBA6 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCFC4256D454C00A3DBA6 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		B67DCF69256C0E9600A3DBA6 /* ProvincialSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvincialSummary.swift; sourceTree = "<group>"; };
 		B67DCFBE256D097A00A3DBA6 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		B67DCFC1256D13A700A3DBA6 /* ProvincialSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvincialSummaryView.swift; sourceTree = "<group>"; };
+		B67DCFC4256D454C00A3DBA6 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				B63872292569879C00174C71 /* ContentView.swift */,
 				B67DCFBE256D097A00A3DBA6 /* LeaderboardView.swift */,
 				B67DCFC1256D13A700A3DBA6 /* ProvincialSummaryView.swift */,
+				B67DCFC4256D454C00A3DBA6 /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B67DCFBF256D097A00A3DBA6 /* LeaderboardView.swift in Sources */,
+				B67DCFC5256D454C00A3DBA6 /* MapView.swift in Sources */,
 				B67DCF2D2569BCB200A3DBA6 /* CovidViewModel.swift in Sources */,
 				B638722D2569879C00174C71 /* COVID_19_Hotspot_Map.xcdatamodeld in Sources */,
 				B63872262569879C00174C71 /* AppDelegate.swift in Sources */,
