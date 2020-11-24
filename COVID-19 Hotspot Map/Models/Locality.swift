@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class City: NSManagedObject, Decodable {
+class Locality: NSManagedObject, Decodable {
     private enum CodingKeys: String, CodingKey {
         case name = "city_ascii"
         case province = "province_name"

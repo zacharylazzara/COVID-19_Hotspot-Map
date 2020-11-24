@@ -18,7 +18,7 @@
 		B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF292569B23800A3DBA6 /* Province.swift */; };
 		B67DCF2D2569BCB200A3DBA6 /* CovidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */; };
 		B67DCF502569F20200A3DBA6 /* canadacities.json in Resources */ = {isa = PBXBuildFile; fileRef = B67DCF4F2569F20200A3DBA6 /* canadacities.json */; };
-		B67DCF572569F67B00A3DBA6 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF562569F67B00A3DBA6 /* City.swift */; };
+		B67DCF572569F67B00A3DBA6 /* Locality.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF562569F67B00A3DBA6 /* Locality.swift */; };
 		B67DCF6A256C0E9600A3DBA6 /* ProvincialSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF69256C0E9600A3DBA6 /* ProvincialSummary.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		B67DCF292569B23800A3DBA6 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
 		B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidViewModel.swift; sourceTree = "<group>"; };
 		B67DCF4F2569F20200A3DBA6 /* canadacities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = canadacities.json; sourceTree = "<group>"; };
-		B67DCF562569F67B00A3DBA6 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		B67DCF562569F67B00A3DBA6 /* Locality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locality.swift; sourceTree = "<group>"; };
 		B67DCF69256C0E9600A3DBA6 /* ProvincialSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvincialSummary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,7 +98,7 @@
 				B638722B2569879C00174C71 /* COVID_19_Hotspot_Map.xcdatamodeld */,
 				B67DCF4F2569F20200A3DBA6 /* canadacities.json */,
 				B67DCF292569B23800A3DBA6 /* Province.swift */,
-				B67DCF562569F67B00A3DBA6 /* City.swift */,
+				B67DCF562569F67B00A3DBA6 /* Locality.swift */,
 				B67DCF69256C0E9600A3DBA6 /* ProvincialSummary.swift */,
 			);
 			path = Models;
@@ -206,7 +206,7 @@
 				B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */,
 				B63872492569887100174C71 /* LocationManager.swift in Sources */,
 				B63872282569879C00174C71 /* SceneDelegate.swift in Sources */,
-				B67DCF572569F67B00A3DBA6 /* City.swift in Sources */,
+				B67DCF572569F67B00A3DBA6 /* Locality.swift in Sources */,
 				B638722A2569879C00174C71 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

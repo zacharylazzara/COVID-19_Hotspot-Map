@@ -14,8 +14,8 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     private var apiURLString = "https://api.opencovid.ca/"
     private var location: LocationManager
     
-    @Published public var localities:[String:City] = [:] // TODO: make private and implement a getter
-    @Published private var locality: City? // TODO: make private and implement a getter/setter
+    @Published public var localities:[String:Locality] = [:] // TODO: make private and implement a getter
+    @Published private var locality: Locality? // TODO: make private and implement a getter/setter
     
     init() {
         location = LocationManager()
@@ -28,7 +28,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         locality = localities[loc] ?? nil
     }
     
-    func getLocality() -> City? {
+    func getLocality() -> Locality? {
         return locality
     }
     
@@ -85,7 +85,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
                 let cityDecoder = JSONDecoder()
                 
                 cityDecoder.userInfo[CodingUserInfoKey.context!] = self.persistentContainer.viewContext
-                let decodedCities = try cityDecoder.decode([City].self, from: data)
+                let decodedCities = try cityDecoder.decode([Locality].self, from: data)
                 
                 let provincialSummary = "/summary?prov/"
                 guard let apiURL = URL(string: apiURLString + provincialSummary) else {
