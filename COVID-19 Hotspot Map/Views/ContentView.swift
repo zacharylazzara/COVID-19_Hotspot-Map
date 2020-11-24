@@ -12,19 +12,22 @@ struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
     
     var body: some View {
-        VStack {
-            Text("\(covidViewModel.getCurrentLocality()?.name ?? "unavailable"), \(covidViewModel.getCurrentLocality()?.province ?? "unavailable")")
-            Text("Active Provincial Cases: \(covidViewModel.getCurrentLocality()?.provinceCases ?? -1)")
-            Text("Active Local Cases: \(covidViewModel.getCurrentLocality()?.covidCases ?? -1)")
+        ZStack{
+            MapView(localities: covidViewModel.getLocalities())
+                .edgesIgnoringSafeArea(.all)
+                .frame(height: UIScreen.main.bounds.height)
+            VStack(alignment: .leading){
+                Spacer()
+                Text("\(covidViewModel.getCurrentLocality()?.name ?? "unavailable"), \(covidViewModel.getCurrentLocality()?.province ?? "unavailable")")
+                Text("Active Provincial Cases: \(covidViewModel.getCurrentLocality()?.provinceCases ?? -1)")
+                Text("Active Local Cases: \(covidViewModel.getCurrentLocality()?.covidCases ?? -1)")
+                
+            }.padding(.bottom, 100)
             
             //print("\(covidViewModel.getLocalities()?["Toronto"])")
-            MapView(localities: covidViewModel.getLocalities())
-            
             // TODO: we need to show the probability of catching COVID-19; we'll need to use the average spread rate as well as the population density for the locality
-            
-            
-            Spacer()
-        }.onAppear {
+        }
+        .onAppear {
             
         }
     }
@@ -38,23 +41,19 @@ struct ContentView_Previews: PreviewProvider {
 
 struct MapView: UIViewRepresentable {
     @EnvironmentObject var covidViewModel: CovidViewModel
-//    typealias UIViewType = <#type#>
+    //    typealias UIViewType = <#type#>
     
     @ObservedObject var locationManager = LocationManager()
     //private var location: String = ""
     //private var parkingCoordinates: CLLocationCoordinate2D
-    private let regionRadius: CLLocationDistance = 300
+    private let regionRadius: CLLocationDistance = 20000
     
     private var localitiesCoordinates: [String:CLLocationCoordinate2D] = [:]
     
     init(localities: [String:Locality]) {
-//        self.location = location
-//        self.parkingCoordinates = coordinates
-        
         for (key, locality) in localities {
             localitiesCoordinates[key] = CLLocationCoordinate2D(latitude: locality.lat, longitude: locality.lng)
         }
-        
     }
     
     func makeCoordinator() -> MapView.Coordinator {
@@ -93,7 +92,7 @@ struct MapView: UIViewRepresentable {
         if (covidViewModel.isDataInitialized()) {
             for (key, coordinates) in localitiesCoordinates {
                 self.locationManager.addPinToMapView(mapView: uiView, coordinates: coordinates, title: key)
-                print(coordinates) // TODO: they're all negative for some reason
+                print(coordinates)
             }
         }
         
@@ -103,22 +102,22 @@ struct MapView: UIViewRepresentable {
         
         // create and display directions
         
-//        let request = MKDirections.Request()
-//        request.source = MKMapItem(placemark: MKPlacemark(coordinate: sourceCoordinates))
+        //        let request = MKDirections.Request()
+        //        request.source = MKMapItem(placemark: MKPlacemark(coordinate: sourceCoordinates))
         //request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destinationCoordinates))
-//        let direction = MKDirections(request: request)
-//
-//        direction.calculate{(direct, error) in
-//            if (error != nil) {
-//                print(#function, "Error finding directions ", error?.localizedDescription as Any)
-//            }
-//            let polyline = direct?.routes.first?.polyline
-//            if (polyline != nil) {
-//                uiView.addOverlay(polyline!)
-//                uiView.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
-//            }
-//
-//        }
+        //        let direction = MKDirections(request: request)
+        //
+        //        direction.calculate{(direct, error) in
+        //            if (error != nil) {
+        //                print(#function, "Error finding directions ", error?.localizedDescription as Any)
+        //            }
+        //            let polyline = direct?.routes.first?.polyline
+        //            if (polyline != nil) {
+        //                uiView.addOverlay(polyline!)
+        //                uiView.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
+        //            }
+        //
+        //        }
         
         //we should check if source and destination are the same location; inform user if they are but don't display the route (the MKCoordinator will not provide direction in this case)
         //Check for nil values/unavailability
