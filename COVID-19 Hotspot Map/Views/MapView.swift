@@ -53,7 +53,11 @@ struct MapView: UIViewRepresentable {
         
         if (covidViewModel.isDataInitialized()) {
             localities.forEach { locality in
-                let annotation = LocalityAnnotation(locality: locality)
+                // TODO: get radius of each city?
+                let localityAnnotation = LocalityAnnotation(locality: locality)
+//                let circle = MKCircle(center: localityAnnotation.coordinate, radius: 1000)
+//                uiView.addOverlay(circle)
+                let annotation = localityAnnotation
                 uiView.addAnnotation(annotation)
             }
         }
@@ -62,6 +66,18 @@ struct MapView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+                if overlay is MKCircle {
+                    let renderer = MKCircleRenderer(overlay: overlay)
+                    let color: UIColor = .white
+                    renderer.fillColor = color.withAlphaComponent(0.2)
+                    renderer.lineWidth = 2.0
+                    return renderer
+                } else {
+                    return MKPolylineRenderer()
+                }
+            }
+        
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             guard let annotation = annotation as? LocalityAnnotation else { return nil }
             let identifier = "Locality"
@@ -70,7 +86,7 @@ struct MapView: UIViewRepresentable {
             
             if (view == nil) {
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view!.image = UIImage(systemName: "heart.circle") // TODO: colour code this?
+                view!.image = UIImage(systemName: "cross.circle.fill") // TODO: colour code this?
                 view!.canShowCallout = true
             } else {
                 view!.annotation = annotation
