@@ -11,7 +11,7 @@ import Foundation
 import CoreLocation
 
 protocol LocationDelegate {
-    func setLocality(loc: String)
+    func setCurrentLocality(loc: String)
 }
 
 class LocationManager: NSObject {
@@ -83,7 +83,7 @@ extension LocationManager: CLLocationManagerDelegate {
             print(#function, "Loc: \(loc ?? ""), Admin: \(admin ?? "")")
             print(#function, "Placemarks: \(placemarks)")
             
-            self.delegate?.setLocality(loc: loc ?? "unavailable")
+            self.delegate?.setCurrentLocality(loc: loc ?? "unavailable")
         })
     }
 }

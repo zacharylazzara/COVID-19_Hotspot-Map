@@ -14,8 +14,8 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     private var apiURLString = "https://api.opencovid.ca/"
     private var location: LocationManager
     
-    @Published public var localities:[String:Locality] = [:] // TODO: make private and implement a getter
-    @Published private var locality: Locality? // TODO: make private and implement a getter/setter
+    @Published private var localities:[String:Locality] = [:] // This is a dictionary of all localities in Canada
+    @Published private var currentLocality: Locality? // This is where the user is currently located
     
     init() {
         location = LocationManager()
@@ -24,12 +24,16 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         }
     }
     
-    func setLocality(loc: String) {
-        locality = localities[loc] ?? nil
+    func setCurrentLocality(loc: String) {
+        currentLocality = localities[loc] ?? nil
     }
     
-    func getLocality() -> Locality? {
-        return locality
+    func getCurrentLocality() -> Locality? {
+        return currentLocality
+    }
+    
+    func getLocalities() -> [String:Locality] {
+        return localities
     }
     
     // TODO: we'll probably use densities (for the city not province) to determine probability of infection (it will determine danger score)
@@ -115,17 +119,17 @@ class CovidViewModel : ObservableObject, LocationDelegate {
                         }
                     }.resume()
                     group.wait()
-                    decodedCities.forEach { city in
-                        let province = decodedProvincialSummary!.provinces[city.province!]
-                        let provincePopulation = Int64(self.provincePopulations[city.province!]!)
-                        city.provinceCases = Int64(province?.activeCases ?? 0)
+                    decodedCities.forEach { locality in
+                        let province = decodedProvincialSummary!.provinces[locality.province!]
+                        let provincePopulation = Int64(self.provincePopulations[locality.province!]!)
+                        locality.provinceCases = Int64(province?.activeCases ?? 0)
                         
                         // NOTE: This is the prediction; we can tweak this to make the predictions better
-                        city.covidCases = Int64(
-                            Double(city.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0)
-                        )
+                        locality.covidCases = Int64(Double(locality.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0))
                         
-                        self.localities[city.name!] = city
+                        // TODO: we should also predict the risk factor associated with each location based on the population density and the reproductive index of COVID-19
+                        
+                        self.localities[locality.name!] = locality
                     }
                     //self.cities = decodedCities
                 }

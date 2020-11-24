@@ -17,9 +17,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("\(covidViewModel.getLocality()?.name ?? "unavailable"), \(covidViewModel.getLocality()?.province ?? "unavailable")")
-            Text("Active Provincial Cases: \(covidViewModel.getLocality()?.provinceCases ?? -1)")
-            Text("Active Local Cases: \(covidViewModel.getLocality()?.covidCases ?? -1)")
+            Text("\(covidViewModel.getCurrentLocality()?.name ?? "unavailable"), \(covidViewModel.getCurrentLocality()?.province ?? "unavailable")")
+            Text("Active Provincial Cases: \(covidViewModel.getCurrentLocality()?.provinceCases ?? -1)")
+            Text("Active Local Cases: \(covidViewModel.getCurrentLocality()?.covidCases ?? -1)")
             
 //            ForEach(summaryViewModel.summary.regions, id: \.self) { region in
 //                Text("Province: \(region.province)")
