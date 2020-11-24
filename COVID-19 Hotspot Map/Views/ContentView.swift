@@ -12,24 +12,45 @@ struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
     
     var body: some View {
-        ZStack{
-            MapView(localities: covidViewModel.getLocalities())
-                .edgesIgnoringSafeArea(.all)
-                .frame(height: UIScreen.main.bounds.height)
-            VStack(alignment: .leading){
-                Spacer()
-                Text("\(covidViewModel.getCurrentLocality()?.name ?? "unavailable"), \(covidViewModel.getCurrentLocality()?.province ?? "unavailable")")
-                Text("Active Provincial Cases: \(covidViewModel.getCurrentLocality()?.provinceCases ?? -1)")
-                Text("Active Local Cases: \(covidViewModel.getCurrentLocality()?.covidCases ?? -1)")
-                
-            }.padding(.bottom, 100)
+        NavigationView {
+            ZStack {
+                MapView(localities: covidViewModel.getLocalities())
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(height: UIScreen.main.bounds.height)
+                VStack(alignment: .leading){
+                    Spacer()
+                    
+                    
+                    
+                    // TODO: right align numbers
+                    HStack{
+                        Text("Active Provincial Cases:\t")
+                        Text("\(covidViewModel.getCurrentLocality()?.provinceCases ?? -1)") // right align this
+                    }
+                    HStack{
+                        Text("Predicted Local Cases:\t")
+                        Text("\(covidViewModel.getCurrentLocality()?.covidCases ?? -1)") // right align this
+                    }
+                }.padding(.bottom, 90)
+            }
+            .navigationBarTitle(Text("\(covidViewModel.getCurrentLocality()?.name ?? "Unknown"), \(covidViewModel.getCurrentLocality()?.province ?? "Unknown")"), displayMode: .inline)
+            .navigationBarItems(trailing: HStack {
+                NavigationLink(
+                    destination: LeaderboardView(),
+                    label: {
+                        Image(systemName: "thermometer")
+                    })
+                NavigationLink(
+                    destination: ProvincialSummaryView(),
+                    label: {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                    })
+            })
+            .navigationBarBackButtonHidden(true)
+        }.onAppear {
             
-            //print("\(covidViewModel.getLocalities()?["Toronto"])")
-            // TODO: we need to show the probability of catching COVID-19; we'll need to use the average spread rate as well as the population density for the locality
         }
-        .onAppear {
-            
-        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
