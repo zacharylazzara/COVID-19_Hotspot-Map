@@ -34,7 +34,11 @@ struct ContentView: View {
                 }.padding(.bottom, 90)
             }
             .navigationBarTitle(Text("\(covidViewModel.getCurrentLocality()?.name ?? "Unknown"), \(covidViewModel.getCurrentLocality()?.province ?? "Unknown")"), displayMode: .inline)
-            .navigationBarItems(trailing: HStack {
+            .navigationBarItems(
+                leading: HStack {
+                    Text("\(covidViewModel.getCurrentLocality()?.riskScore ?? 0)") // TODO: format the string and add a symbol
+                },
+                trailing: HStack {
                 NavigationLink(
                     destination: LeaderboardView(),
                     label: {

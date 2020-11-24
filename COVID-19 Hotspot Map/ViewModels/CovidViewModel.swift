@@ -76,6 +76,8 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         "Nunavut": 35944
     ]
     
+    public let covidReproductiveNumber = 1.1 // This is the COVID-19 Reproductive Number; we should try and get it from an API for our region if possible
+    
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "COVID_19_Hotspot_Map")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -134,16 +136,12 @@ class CovidViewModel : ObservableObject, LocationDelegate {
                         let provincePopulation = Int64(self.provincePopulations[locality.province!]!)
                         locality.provinceCases = Int64(province?.activeCases ?? 0)
                         
-                        // NOTE: This is the prediction; we can tweak this to make the predictions better
+                        // NOTE: These are the predictions; we can tweak them to make the predictions better
                         locality.covidCases = Int64(Double(locality.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0))
-                        
-                        // TODO: we should also predict the risk factor associated with each location based on the population density and the reproductive index of COVID-19
+                        locality.riskScore = Double(locality.covidCases) / Double(locality.population) * Double(locality.density) * self.covidReproductiveNumber
                         
                         self.localities[locality.name!] = locality
                     }
-                    //self.localities = decodedLocalities
-                    
-                    //self.cities = decodedCities
                 }
                 
                 // TODO: Do we need to save cities to the database or is it automatic? Also, we should make sure we overwrite data with updated date if it already exists
