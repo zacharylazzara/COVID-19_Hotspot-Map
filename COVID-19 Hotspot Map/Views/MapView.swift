@@ -70,7 +70,7 @@ struct MapView: UIViewRepresentable {
             
             if (view == nil) {
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view!.image = UIImage(systemName: "cross.fill") // TODO: colour code this?
+                view!.image = UIImage(systemName: "heart.circle") // TODO: colour code this?
                 view!.canShowCallout = true
             } else {
                 view!.annotation = annotation
