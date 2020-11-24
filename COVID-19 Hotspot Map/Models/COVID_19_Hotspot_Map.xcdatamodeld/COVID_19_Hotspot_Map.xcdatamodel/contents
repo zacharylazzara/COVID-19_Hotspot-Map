@@ -6,7 +6,7 @@
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="nearbyCases" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="City" representedClassName=".City" syncable="YES" codeGenerationType="category">
+    <entity name="Locality" representedClassName=".City" syncable="YES" codeGenerationType="category">
         <attribute name="covidCases" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="density" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lat" attributeType="Double" defaultValueString="-1" usesScalarValueType="YES"/>
@@ -19,6 +19,6 @@
     </entity>
     <elements>
         <element name="Checkpoint" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="City" positionX="-45" positionY="27" width="128" height="178"/>
+        <element name="Locality" positionX="-45" positionY="27" width="128" height="178"/>
     </elements>
 </model>

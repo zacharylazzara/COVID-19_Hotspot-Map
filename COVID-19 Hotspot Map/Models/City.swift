@@ -22,7 +22,7 @@ class City: NSManagedObject, Decodable {
     required convenience public init(from decoder: Decoder) throws {
         guard let context = CodingUserInfoKey.context,
               let moc = decoder.userInfo[context] as? NSManagedObjectContext,
-              let entity = NSEntityDescription.entity(forEntityName: "City", in: moc)
+              let entity = NSEntityDescription.entity(forEntityName: "Locality", in: moc)
         else {
             fatalError("Couldn't get context")
         }
