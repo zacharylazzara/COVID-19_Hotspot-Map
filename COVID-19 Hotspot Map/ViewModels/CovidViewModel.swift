@@ -13,6 +13,7 @@ import CoreData
 class CovidViewModel : ObservableObject, LocationDelegate {
     private var apiURLString = "https://api.opencovid.ca/"
     private var location: LocationManager
+    private var initialized: Bool = false
     
     @Published private var localities:[String:Locality] = [:] // This is a dictionary of all localities in Canada
     @Published private var currentLocality: Locality? // This is where the user is currently located
@@ -21,7 +22,12 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         location = LocationManager()
         initializeCityData().notify(queue: .main) {
             self.location.delegate = self
+            self.initialized = true
         }
+    }
+    
+    func isDataInitialized() -> Bool {
+        return initialized
     }
     
     func setCurrentLocality(loc: String) {
@@ -83,13 +89,17 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     func initializeCityData() -> DispatchGroup {
         let group = DispatchGroup()
         
+        if (initialized) {
+            return group
+        }
+        
         do {
             if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
                 let data = try Data(contentsOf: url)
                 let cityDecoder = JSONDecoder()
                 
                 cityDecoder.userInfo[CodingUserInfoKey.context!] = self.persistentContainer.viewContext
-                let decodedCities = try cityDecoder.decode([Locality].self, from: data)
+                let decodedLocalities = try cityDecoder.decode([Locality].self, from: data)
                 
                 let provincialSummary = "/summary?prov/"
                 guard let apiURL = URL(string: apiURLString + provincialSummary) else {
@@ -119,7 +129,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
                         }
                     }.resume()
                     group.wait()
-                    decodedCities.forEach { locality in
+                    decodedLocalities.forEach { locality in
                         let province = decodedProvincialSummary!.provinces[locality.province!]
                         let provincePopulation = Int64(self.provincePopulations[locality.province!]!)
                         locality.provinceCases = Int64(province?.activeCases ?? 0)
@@ -131,6 +141,8 @@ class CovidViewModel : ObservableObject, LocationDelegate {
                         
                         self.localities[locality.name!] = locality
                     }
+                    //self.localities = decodedLocalities
+                    
                     //self.cities = decodedCities
                 }
                 
@@ -149,9 +161,9 @@ class CovidViewModel : ObservableObject, LocationDelegate {
             print(#function, "Error decoding data: \(error)")
         }
         
-        group.notify(queue: .main) {
-            print(#function, "Data initialized")
-        }
+//        group.notify(queue: .main) {
+//            print(#function, "Data initialized")
+//        }
         
         return group
     }

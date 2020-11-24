@@ -9,15 +9,20 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 protocol LocationDelegate {
     func setCurrentLocality(loc: String)
 }
 
-class LocationManager: NSObject {
+class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     
-    var delegate:LocationDelegate?
+    @Published public var lat: Double = 0
+    @Published public var lng: Double = 0
+    
+    
+    public var delegate:LocationDelegate?
     
     override init() {
         super.init()
@@ -59,31 +64,32 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var lat: Double?
-        var lng: Double?
+//        var lat: Double?
+//        var lng: Double?
         
         if locations.last != nil {
             lat = (locations.last!.coordinate.latitude)
             lng = (locations.last!.coordinate.longitude)
         }
         
-        lat = (manager.location?.coordinate.latitude)
-        lng = (manager.location?.coordinate.longitude)
-        
-        
+        lat = (manager.location?.coordinate.latitude) ?? 0
+        lng = (manager.location?.coordinate.longitude) ?? 0
         
         let geoCoder = CLGeocoder()
-        let location = CLLocation(latitude: lat ?? 0, longitude: lng ?? 0)
+        let location = CLLocation(latitude: lat , longitude: lng )
         
         geoCoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
-            let loc = placemarks?[0].locality // City
-            let admin = placemarks?[0].administrativeArea // Province
-            
-            print(#function, "Lat: \(lat ?? 0), Lng: \(lng ?? 0)")
-            print(#function, "Loc: \(loc ?? ""), Admin: \(admin ?? "")")
-            print(#function, "Placemarks: \(placemarks)")
-            
+            let loc = placemarks?[0].locality
             self.delegate?.setCurrentLocality(loc: loc ?? "unavailable")
         })
+    }
+    
+    func addPinToMapView(mapView: MKMapView, coordinates: CLLocationCoordinate2D, title: String?) {
+        let mapAnnotation = MKPointAnnotation()
+        mapAnnotation.coordinate = coordinates
+        
+        mapAnnotation.title = title
+        
+        mapView.addAnnotation(mapAnnotation)
     }
 }
