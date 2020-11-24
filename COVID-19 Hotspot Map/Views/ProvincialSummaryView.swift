@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ProvincialSummaryView: View {
     var body: some View {
-        Text("This will be a summary of the province's COVID-19 cases; it'll include things like the mortality rate, number of deaths, number of recovered, cumulative cases, active cases, etc; basically everything we get from the API as well as some information we determine for ourselves. Might want to include graphs to show trends and such.").padding()
+        Text("This will be a summary of the province's COVID-19 cases; it'll include things like the mortality rate, number of deaths, number of recovered, cumulative cases, active cases, etc; basically everything we get from the API as well as some information we determine for ourselves. Might want to include graphs to show trends and such. It should also mention the risk score, which is the score displayed in the icon we clicked on").padding()
         Spacer()
     }
 }

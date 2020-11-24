@@ -76,7 +76,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         "Nunavut": 35944
     ]
     
-    public let covidReproductiveNumber = 1.1 // This is the COVID-19 Reproductive Number; we should try and get it from an API for our region if possible
+    public let covidReproductiveNumber = 1.1 // This is the COVID-19 Reproductive Number; we should try and get it from an API for our region if possible, as it varies per region and over time
     
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "COVID_19_Hotspot_Map")

@@ -36,20 +36,21 @@ struct ContentView: View {
             .navigationBarTitle(Text("\(covidViewModel.getCurrentLocality()?.name ?? "Unknown"), \(covidViewModel.getCurrentLocality()?.province ?? "Unknown")"), displayMode: .inline)
             .navigationBarItems(
                 leading: HStack {
-                    Text("\(covidViewModel.getCurrentLocality()?.riskScore ?? 0)") // TODO: format the string and add a symbol
+                    NavigationLink(
+                        destination: ProvincialSummaryView(),
+                        label: {
+                            Text("\(Image(systemName: "waveform.path.ecg"))\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.riskScore ?? -1))")
+                        })
                 },
                 trailing: HStack {
-                NavigationLink(
-                    destination: LeaderboardView(),
-                    label: {
-                        Image(systemName: "thermometer")
-                    })
-                NavigationLink(
-                    destination: ProvincialSummaryView(),
-                    label: {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                    })
-            })
+                    // TODO: we should probably put a menu here and have the leaderboard and settings accessible via the hamburger menu, as these are unlikely to be accessed as frequently by the user
+                    NavigationLink(
+                        destination: LeaderboardView(),
+                        label: {
+                            Image(systemName: "thermometer")
+                        })
+                    
+                })
             .navigationBarBackButtonHidden(true)
         }.onAppear {
             
