@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// TODO: look into https://projectpandemic.concordia.ca/ and see if they have an API?
+// TODO: for some regions the numbers are way off; we should get the numbers by health region instead of by province
+
 
 struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
