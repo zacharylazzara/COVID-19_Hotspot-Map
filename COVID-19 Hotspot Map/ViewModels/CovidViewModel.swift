@@ -28,7 +28,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     init(context: NSManagedObjectContext) {
         moc = context
         location = LocationManager()
-        initializeCityData().notify(queue: .main) {
+        initializeLocalityData().notify(queue: .main) {
             self.location.delegate = self
             self.initialized = true
         }
@@ -133,24 +133,19 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         }
     }
     
-    public func initializeCityData() -> DispatchGroup {
+    public func initializeLocalityData() -> DispatchGroup {
         let group = DispatchGroup()
-        
         if (initialized) {
             return group
         }
-        
         loadLocalityData()
-        
         let provincialSummary = "/summary?prov/"
         guard let apiURL = URL(string: apiURLString + provincialSummary) else {
             print(#function, "Problem with API URL:\n\n\(apiURLString + provincialSummary)\n\n")
             return group
         }
-        
         DispatchQueue.main.async {
             var decodedProvincialSummary: ProvincialSummary?
-            
             group.enter()
             URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
                 if let e = error {
