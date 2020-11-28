@@ -46,8 +46,12 @@ extension LocationManager: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             manager.requestLocation()
             break
+        case .authorizedAlways:
+            manager.requestLocation()
+            break;
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
+            manager.requestAlwaysAuthorization()
             manager.requestLocation()
             break
         case .restricted:
@@ -82,14 +86,5 @@ extension LocationManager: CLLocationManagerDelegate {
             let loc = placemarks?[0].locality
             self.delegate?.setCurrentLocality(loc: loc ?? "unavailable")
         })
-    }
-    
-    func addPinToMapView(mapView: MKMapView, coordinates: CLLocationCoordinate2D, title: String?) {
-        let mapAnnotation = MKPointAnnotation()
-        mapAnnotation.coordinate = coordinates
-        
-        mapAnnotation.title = title
-        
-        mapView.addAnnotation(mapAnnotation)
     }
 }

@@ -18,17 +18,29 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     private var apiURLString = "https://api.opencovid.ca/"
     private var location: LocationManager
     private var initialized: Bool = false
+    private let moc: NSManagedObjectContext
+    
+    // TODO: maybe the threat level should scale based on distance from centre of city (coordinates found in our locality json)
     
     @Published private var localities:[String:Locality] = [:] // This is a dictionary of all localities in Canada
     @Published private var currentLocality: Locality? // This is where the user is currently located
     
-    init() {
+    init(context: NSManagedObjectContext) {
+        moc = context
         location = LocationManager()
         initializeCityData().notify(queue: .main) {
             self.location.delegate = self
             self.initialized = true
         }
     }
+    
+    //    init() {
+    //        location = LocationManager()
+    //        initializeCityData().notify(queue: .main) {
+    //            self.location.delegate = self
+    //            self.initialized = true
+    //        }
+    //    }
     
     func isDataInitialized() -> Bool {
         return initialized
@@ -92,81 +104,130 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         return container
     }()
     
-    func initializeCityData() -> DispatchGroup {
+    private func loadLocalityData() {
+        let request = NSFetchRequest<Locality>(entityName: "Locality")
+        do {
+            let result = try moc.fetch(request)
+            
+            for locality in result as [Locality] {
+                self.localities[locality.name!] = locality
+            }
+        } catch let error as NSError {
+            print(#function, error.localizedDescription)
+        }
+    }
+    
+    private func registerLocalityData(locs: [Locality], decodedProvincialSummary: ProvincialSummary?) {
+        if decodedProvincialSummary != nil {
+            locs.forEach { locality in
+                let province = decodedProvincialSummary!.provinces[locality.province!]
+                let provincePopulation = Int64(self.provincePopulations[locality.province!]!)
+                locality.provinceCases = Int64(province?.activeCases ?? 0)
+                
+                // NOTE: These are the predictions; we can tweak them to make the predictions better
+                locality.covidCases = Int64(Double(locality.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0))
+                locality.threatLevel = Double(locality.covidCases) / Double(locality.population) * Double(locality.density) * self.covidReproductiveNumber
+                
+                self.localities[locality.name!] = locality
+            }
+            
+            do { // Save updated infromation to CoreData
+                try self.moc.save()
+            } catch {
+                print(error)
+            }
+        } else {
+            print(#function, "Unable to update COVID-19 data, using old data")
+        }
+    }
+    
+    public func initializeCityData() -> DispatchGroup {
         let group = DispatchGroup()
         
         if (initialized) {
             return group
         }
         
-        do {
-            if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
-                let data = try Data(contentsOf: url)
-                let cityDecoder = JSONDecoder()
-                
-                cityDecoder.userInfo[CodingUserInfoKey.context!] = self.persistentContainer.viewContext
-                let decodedLocalities = try cityDecoder.decode([Locality].self, from: data)
-                
-                let provincialSummary = "/summary?prov/"
-                guard let apiURL = URL(string: apiURLString + provincialSummary) else {
-                    print(#function, "Problem with API URL:\n\n\(apiURLString + provincialSummary)\n\n")
-                    return group
-                }
-                
-                DispatchQueue.main.async {
-                    var decodedProvincialSummary: ProvincialSummary?
-                    
-                    group.enter()
-                    URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
-                        if let e = error {
-                            print(#function, "Error \(e)")
-                        } else {
-                            do {
-                                if let jsonData = data {
-                                    let provincialSummaryDecoder = JSONDecoder()
-                                    decodedProvincialSummary = try provincialSummaryDecoder.decode(ProvincialSummary.self, from: jsonData)
-                                } else {
-                                    print(#function, "JSON data is empty")
-                                }
-                            } catch let error {
-                                print(#function, "Error decoding data: \(error)")
-                            }
-                            group.leave()
-                        }
-                    }.resume()
-                    group.wait()
-                    decodedLocalities.forEach { locality in
-                        let province = decodedProvincialSummary!.provinces[locality.province!]
-                        let provincePopulation = Int64(self.provincePopulations[locality.province!]!)
-                        locality.provinceCases = Int64(province?.activeCases ?? 0)
-                        
-                        // NOTE: These are the predictions; we can tweak them to make the predictions better
-                        locality.covidCases = Int64(Double(locality.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0))
-                        locality.riskScore = Double(locality.covidCases) / Double(locality.population) * Double(locality.density) * self.covidReproductiveNumber
-                        
-                        self.localities[locality.name!] = locality
-                    }
-                }
-                
-                // TODO: Do we need to save cities to the database or is it automatic? Also, we should make sure we overwrite data with updated date if it already exists
-//                print(self.cities)
-//                do {
-//                    try self.persistentContainer.viewContext.save()
-//                } catch {
-//                    print(error)
-//                }
-                
-            } else {
-                print(#function, "JSON data is empty")
-            }
-        } catch let error {
-            print(#function, "Error decoding data: \(error)")
+        loadLocalityData()
+        //return group
+        
+        let provincialSummary = "/summary?prov/"
+        guard let apiURL = URL(string: apiURLString + provincialSummary) else {
+            print(#function, "Problem with API URL:\n\n\(apiURLString + provincialSummary)\n\n")
+            return group
         }
         
-//        group.notify(queue: .main) {
-//            print(#function, "Data initialized")
-//        }
-        
+        DispatchQueue.main.async {
+            var decodedProvincialSummary: ProvincialSummary?
+            
+            group.enter()
+            URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
+                if let e = error {
+                    print(#function, "Error \(e)")
+                } else {
+                    do {
+                        if let jsonData = data {
+                            let provincialSummaryDecoder = JSONDecoder()
+                            decodedProvincialSummary = try provincialSummaryDecoder.decode(ProvincialSummary.self, from: jsonData)
+                        } else {
+                            print(#function, "JSON data is empty")
+                        }
+                    } catch let error {
+                        print(#function, "Error decoding data: \(error)")
+                    }
+                }
+                group.leave()
+            }.resume()
+            group.wait()
+            if self.localities.isEmpty { // If we have no saved localities from CoreData load and save data from canadacities.json
+                do {
+                    if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
+                        let data = try Data(contentsOf: url)
+                        let cityDecoder = JSONDecoder()
+                        
+                        cityDecoder.userInfo[CodingUserInfoKey.context!] = self.moc //self.persistentContainer.viewContext
+                        let decodedLocalities = try cityDecoder.decode([Locality].self, from: data)
+                        
+                        let provincialSummary = "/summary?prov/"
+                        guard let apiURL = URL(string: self.apiURLString + provincialSummary) else {
+                            print(#function, "Problem with API URL:\n\n\(self.apiURLString + provincialSummary)\n\n")
+                            return //group
+                        }
+                        
+                        DispatchQueue.main.async {
+                            var decodedProvincialSummary: ProvincialSummary?
+                            
+                            group.enter()
+                            URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
+                                if let e = error {
+                                    print(#function, "Error \(e)")
+                                } else {
+                                    do {
+                                        if let jsonData = data {
+                                            let provincialSummaryDecoder = JSONDecoder()
+                                            decodedProvincialSummary = try provincialSummaryDecoder.decode(ProvincialSummary.self, from: jsonData)
+                                        } else {
+                                            print(#function, "JSON data is empty")
+                                        }
+                                    } catch let error {
+                                        print(#function, "Error decoding data: \(error)")
+                                    }
+                                }
+                                group.leave()
+                            }.resume()
+                            group.wait()
+                            self.registerLocalityData(locs: decodedLocalities, decodedProvincialSummary: decodedProvincialSummary)
+                        }
+                    } else {
+                        print(#function, "JSON data is empty")
+                    }
+                } catch let error {
+                    print(#function, "Error decoding data: \(error)")
+                }
+            } else { // If we have localities saved in CoreData load them without reading canadacities.json
+                self.registerLocalityData(locs: Array(self.localities.values.map{$0}), decodedProvincialSummary: decodedProvincialSummary)
+            }
+        }
         return group
     }
 }

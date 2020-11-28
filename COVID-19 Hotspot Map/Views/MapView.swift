@@ -57,8 +57,8 @@ struct MapView: UIViewRepresentable {
                 let localityAnnotation = LocalityAnnotation(locality: locality)
 //                let circle = MKCircle(center: localityAnnotation.coordinate, radius: 1000)
 //                uiView.addOverlay(circle)
-                let annotation = localityAnnotation
-                uiView.addAnnotation(annotation)
+                
+                uiView.addAnnotation(localityAnnotation)
             }
         }
         
@@ -91,6 +91,9 @@ struct MapView: UIViewRepresentable {
             } else {
                 view!.annotation = annotation
             }
+            
+            view!.canShowCallout = true
+            view!.rightCalloutAccessoryView = UIButton(type: .infoDark) // TODO: needs to bring us to a detail page
             
             return view
         }

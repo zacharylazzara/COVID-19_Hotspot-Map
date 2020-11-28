@@ -14,8 +14,8 @@ class LocalityAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     
     init(locality: Locality) {
-        title = String(format: "%@, %@", locality.name!, locality.provinceId!)
-        subtitle = String(format: "COVID-19 Cases: %d", locality.covidCases, locality.riskScore)
+        title = String(format: "%@, %@\t", locality.name!, locality.provinceId!)
+        subtitle = String(format: "Estimated Cases: %d\t", locality.covidCases)
         self.coordinate = CLLocationCoordinate2D(latitude: locality.lat, longitude: locality.lng)
     }
 }

@@ -23,16 +23,15 @@ struct ContentView: View {
                 VStack(alignment: .leading){
                     Spacer()
                     
-                    
-                    
+
                     // TODO: right align numbers
                     HStack{
-                        Text("Active Provincial Cases:\t")
-                        Text("\(covidViewModel.getCurrentLocality()?.provinceCases ?? -1)") // right align this
+                        Text("Provincial Cases:\t\t\t")
+                        Text("\(covidViewModel.getCurrentLocality()?.provinceCases ?? 0)") // right align this
                     }
                     HStack{
-                        Text("Predicted Local Cases:\t")
-                        Text("\(covidViewModel.getCurrentLocality()?.covidCases ?? -1)") // right align this
+                        Text("Estimated Local Cases:\t")
+                        Text("\(covidViewModel.getCurrentLocality()?.covidCases ?? 0)") // right align this
                     }
                 }.padding(.bottom, 90)
             }
@@ -42,7 +41,7 @@ struct ContentView: View {
                     NavigationLink(
                         destination: ProvincialSummaryView(),
                         label: {
-                            Text("\(Image(systemName: "waveform.path.ecg"))\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.riskScore ?? -1))")
+                            Text("\(Image(systemName: "waveform.path.ecg"))\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.threatLevel ?? 0))")
                         }).foregroundColor(.red) // TODO: we should colour code this based on how it compares to all other regions
                 },
                 trailing: HStack {

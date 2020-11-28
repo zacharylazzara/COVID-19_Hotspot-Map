@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location is required to update local estimated cases and threat score</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to find your location so we know what regions to show you</string>
+	<string>Location is required to update local estimated cases and threat score</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used to find your location so we know what regions to show you</string>
+	<string>Location is required to update local estimated cases and threat score</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

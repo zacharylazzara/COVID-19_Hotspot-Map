@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61D09632570A1CB00734CEF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B61D09612570A1CB00734CEF /* Interface.storyboard */; };
+		B61D09652570A1CE00734CEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B61D09642570A1CE00734CEF /* Assets.xcassets */; };
+		B61D096C2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B61D096B2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B61D09712570A1CE00734CEF /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D09702570A1CE00734CEF /* HostingController.swift */; };
+		B61D09732570A1CE00734CEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D09722570A1CE00734CEF /* ContentView.swift */; };
+		B61D09752570A1CE00734CEF /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D09742570A1CE00734CEF /* ExtensionDelegate.swift */; };
+		B61D09772570A1CE00734CEF /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D09762570A1CE00734CEF /* NotificationController.swift */; };
+		B61D09792570A1CE00734CEF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D09782570A1CE00734CEF /* NotificationView.swift */; };
+		B61D097B2570A1CE00734CEF /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D097A2570A1CE00734CEF /* ComplicationController.swift */; };
+		B61D097D2570A1CF00734CEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B61D097C2570A1CF00734CEF /* Assets.xcassets */; };
+		B61D09802570A1CF00734CEF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B61D097F2570A1CF00734CEF /* Preview Assets.xcassets */; };
+		B61D09852570A1CF00734CEF /* COVID-19 Hotspot Information.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B61D095F2570A1CB00734CEF /* COVID-19 Hotspot Information.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B61D09912570A21900734CEF /* Locality.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF562569F67B00A3DBA6 /* Locality.swift */; };
+		B61D09922570A21900734CEF /* LocalityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC4643256D595B00F51628 /* LocalityAnnotation.swift */; };
+		B61D09932570A21900734CEF /* canadacities.json in Resources */ = {isa = PBXBuildFile; fileRef = B67DCF4F2569F20200A3DBA6 /* canadacities.json */; };
+		B61D09942570A21900734CEF /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF292569B23800A3DBA6 /* Province.swift */; };
+		B61D09952570A21900734CEF /* ProvincialSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF69256C0E9600A3DBA6 /* ProvincialSummary.swift */; };
+		B61D09A02570A23700734CEF /* COVID_19_Hotspot_Map.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B638722B2569879C00174C71 /* COVID_19_Hotspot_Map.xcdatamodeld */; };
+		B61D09A42570A34000734CEF /* CovidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67DCF2C2569BCB200A3DBA6 /* CovidViewModel.swift */; };
+		B61D09A82570A34600734CEF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63872482569887100174C71 /* LocationManager.swift */; };
 		B63872262569879C00174C71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63872252569879C00174C71 /* AppDelegate.swift */; };
 		B63872282569879C00174C71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63872272569879C00174C71 /* SceneDelegate.swift */; };
 		B638722A2569879C00174C71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63872292569879C00174C71 /* ContentView.swift */; };
@@ -26,7 +46,64 @@
 		B6FC4644256D595B00F51628 /* LocalityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC4643256D595B00F51628 /* LocalityAnnotation.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B61D096D2570A1CE00734CEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B638721A2569879C00174C71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B61D096A2570A1CE00734CEF;
+			remoteInfo = "COVID-19 Hotspot Information Extension";
+		};
+		B61D09832570A1CF00734CEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B638721A2569879C00174C71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B61D095E2570A1CB00734CEF;
+			remoteInfo = "COVID-19 Hotspot Information";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B61D09862570A1CF00734CEF /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B61D09852570A1CF00734CEF /* COVID-19 Hotspot Information.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B61D09892570A1CF00734CEF /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B61D096C2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B61D095F2570A1CB00734CEF /* COVID-19 Hotspot Information.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19 Hotspot Information.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B61D09622570A1CB00734CEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		B61D09642570A1CE00734CEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B61D09662570A1CE00734CEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B61D096B2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "COVID-19 Hotspot Information Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B61D09702570A1CE00734CEF /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		B61D09722570A1CE00734CEF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B61D09742570A1CE00734CEF /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		B61D09762570A1CE00734CEF /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		B61D09782570A1CE00734CEF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		B61D097A2570A1CE00734CEF /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		B61D097C2570A1CF00734CEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B61D097F2570A1CF00734CEF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B61D09812570A1CF00734CEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B61D09822570A1CF00734CEF /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		B63872222569879C00174C71 /* COVID-19 Hotspot Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19 Hotspot Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B63872252569879C00174C71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B63872272569879C00174C71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +126,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B61D09682570A1CE00734CEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B638721F2569879C00174C71 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,10 +143,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61D09602570A1CB00734CEF /* COVID-19 Hotspot Information */ = {
+			isa = PBXGroup;
+			children = (
+				B61D09612570A1CB00734CEF /* Interface.storyboard */,
+				B61D09642570A1CE00734CEF /* Assets.xcassets */,
+				B61D09662570A1CE00734CEF /* Info.plist */,
+			);
+			path = "COVID-19 Hotspot Information";
+			sourceTree = "<group>";
+		};
+		B61D096F2570A1CE00734CEF /* COVID-19 Hotspot Information Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B61D09702570A1CE00734CEF /* HostingController.swift */,
+				B61D09722570A1CE00734CEF /* ContentView.swift */,
+				B61D09742570A1CE00734CEF /* ExtensionDelegate.swift */,
+				B61D09762570A1CE00734CEF /* NotificationController.swift */,
+				B61D09782570A1CE00734CEF /* NotificationView.swift */,
+				B61D097A2570A1CE00734CEF /* ComplicationController.swift */,
+				B61D097C2570A1CF00734CEF /* Assets.xcassets */,
+				B61D09812570A1CF00734CEF /* Info.plist */,
+				B61D09822570A1CF00734CEF /* PushNotificationPayload.apns */,
+				B61D097E2570A1CF00734CEF /* Preview Content */,
+			);
+			path = "COVID-19 Hotspot Information Extension";
+			sourceTree = "<group>";
+		};
+		B61D097E2570A1CF00734CEF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B61D097F2570A1CF00734CEF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		B63872192569879C00174C71 = {
 			isa = PBXGroup;
 			children = (
 				B63872242569879C00174C71 /* COVID-19 Hotspot Map */,
+				B61D09602570A1CB00734CEF /* COVID-19 Hotspot Information */,
+				B61D096F2570A1CE00734CEF /* COVID-19 Hotspot Information Extension */,
 				B63872232569879C00174C71 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				B63872222569879C00174C71 /* COVID-19 Hotspot Map.app */,
+				B61D095F2570A1CB00734CEF /* COVID-19 Hotspot Information.app */,
+				B61D096B2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,6 +266,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B61D095E2570A1CB00734CEF /* COVID-19 Hotspot Information */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B61D098D2570A1CF00734CEF /* Build configuration list for PBXNativeTarget "COVID-19 Hotspot Information" */;
+			buildPhases = (
+				B61D095D2570A1CB00734CEF /* Resources */,
+				B61D09892570A1CF00734CEF /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B61D096E2570A1CE00734CEF /* PBXTargetDependency */,
+			);
+			name = "COVID-19 Hotspot Information";
+			productName = "COVID-19 Hotspot Information";
+			productReference = B61D095F2570A1CB00734CEF /* COVID-19 Hotspot Information.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		B61D096A2570A1CE00734CEF /* COVID-19 Hotspot Information Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B61D098C2570A1CF00734CEF /* Build configuration list for PBXNativeTarget "COVID-19 Hotspot Information Extension" */;
+			buildPhases = (
+				B61D09672570A1CE00734CEF /* Sources */,
+				B61D09682570A1CE00734CEF /* Frameworks */,
+				B61D09692570A1CE00734CEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "COVID-19 Hotspot Information Extension";
+			productName = "COVID-19 Hotspot Information Extension";
+			productReference = B61D096B2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		B63872212569879C00174C71 /* COVID-19 Hotspot Map */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B63872392569879E00174C71 /* Build configuration list for PBXNativeTarget "COVID-19 Hotspot Map" */;
@@ -150,10 +307,12 @@
 				B638721E2569879C00174C71 /* Sources */,
 				B638721F2569879C00174C71 /* Frameworks */,
 				B63872202569879C00174C71 /* Resources */,
+				B61D09862570A1CF00734CEF /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B61D09842570A1CF00734CEF /* PBXTargetDependency */,
 			);
 			name = "COVID-19 Hotspot Map";
 			productName = "COVID-19 Hotspot Map";
@@ -169,6 +328,12 @@
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
+					B61D095E2570A1CB00734CEF = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					B61D096A2570A1CE00734CEF = {
+						CreatedOnToolsVersion = 12.2;
+					};
 					B63872212569879C00174C71 = {
 						CreatedOnToolsVersion = 12.2;
 					};
@@ -188,11 +353,32 @@
 			projectRoot = "";
 			targets = (
 				B63872212569879C00174C71 /* COVID-19 Hotspot Map */,
+				B61D095E2570A1CB00734CEF /* COVID-19 Hotspot Information */,
+				B61D096A2570A1CE00734CEF /* COVID-19 Hotspot Information Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B61D095D2570A1CB00734CEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B61D09652570A1CE00734CEF /* Assets.xcassets in Resources */,
+				B61D09632570A1CB00734CEF /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B61D09692570A1CE00734CEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B61D09802570A1CF00734CEF /* Preview Assets.xcassets in Resources */,
+				B61D097D2570A1CF00734CEF /* Assets.xcassets in Resources */,
+				B61D09932570A21900734CEF /* canadacities.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B63872202569879C00174C71 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,6 +393,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B61D09672570A1CE00734CEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B61D09A42570A34000734CEF /* CovidViewModel.swift in Sources */,
+				B61D09732570A1CE00734CEF /* ContentView.swift in Sources */,
+				B61D09952570A21900734CEF /* ProvincialSummary.swift in Sources */,
+				B61D09712570A1CE00734CEF /* HostingController.swift in Sources */,
+				B61D09772570A1CE00734CEF /* NotificationController.swift in Sources */,
+				B61D09942570A21900734CEF /* Province.swift in Sources */,
+				B61D09752570A1CE00734CEF /* ExtensionDelegate.swift in Sources */,
+				B61D09792570A1CE00734CEF /* NotificationView.swift in Sources */,
+				B61D09912570A21900734CEF /* Locality.swift in Sources */,
+				B61D097B2570A1CE00734CEF /* ComplicationController.swift in Sources */,
+				B61D09A02570A23700734CEF /* COVID_19_Hotspot_Map.xcdatamodeld in Sources */,
+				B61D09922570A21900734CEF /* LocalityAnnotation.swift in Sources */,
+				B61D09A82570A34600734CEF /* LocationManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B638721E2569879C00174C71 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,7 +435,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B61D096E2570A1CE00734CEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B61D096A2570A1CE00734CEF /* COVID-19 Hotspot Information Extension */;
+			targetProxy = B61D096D2570A1CE00734CEF /* PBXContainerItemProxy */;
+		};
+		B61D09842570A1CF00734CEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B61D095E2570A1CB00734CEF /* COVID-19 Hotspot Information */;
+			targetProxy = B61D09832570A1CF00734CEF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		B61D09612570A1CB00734CEF /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B61D09622570A1CB00734CEF /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		B63872332569879E00174C71 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -241,6 +468,94 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B61D09872570A1CF00734CEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 94NYJ2UF5C;
+				IBSC_MODULE = COVID_19_Hotspot_Information_Extension;
+				INFOPLIST_FILE = "COVID-19 Hotspot Information/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PROG31975-Group2.COVID-19-Hotspot-Map.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.1;
+			};
+			name = Debug;
+		};
+		B61D09882570A1CF00734CEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 94NYJ2UF5C;
+				IBSC_MODULE = COVID_19_Hotspot_Information_Extension;
+				INFOPLIST_FILE = "COVID-19 Hotspot Information/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PROG31975-Group2.COVID-19-Hotspot-Map.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.1;
+			};
+			name = Release;
+		};
+		B61D098A2570A1CF00734CEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"COVID-19 Hotspot Information Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 94NYJ2UF5C;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "COVID-19 Hotspot Information Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PROG31975-Group2.COVID-19-Hotspot-Map.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.1;
+			};
+			name = Debug;
+		};
+		B61D098B2570A1CF00734CEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"COVID-19 Hotspot Information Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 94NYJ2UF5C;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "COVID-19 Hotspot Information Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PROG31975-Group2.COVID-19-Hotspot-Map.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.1;
+			};
+			name = Release;
+		};
 		B63872372569879E00174C71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -402,6 +717,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B61D098C2570A1CF00734CEF /* Build configuration list for PBXNativeTarget "COVID-19 Hotspot Information Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B61D098A2570A1CF00734CEF /* Debug */,
+				B61D098B2570A1CF00734CEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B61D098D2570A1CF00734CEF /* Build configuration list for PBXNativeTarget "COVID-19 Hotspot Information" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B61D09872570A1CF00734CEF /* Debug */,
+				B61D09882570A1CF00734CEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B638721D2569879C00174C71 /* Build configuration list for PBXProject "COVID-19 Hotspot Map" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
