@@ -34,14 +34,6 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         }
     }
     
-    //    init() {
-    //        location = LocationManager()
-    //        initializeCityData().notify(queue: .main) {
-    //            self.location.delegate = self
-    //            self.initialized = true
-    //        }
-    //    }
-    
     func isDataInitialized() -> Bool {
         return initialized
     }
@@ -149,7 +141,6 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         }
         
         loadLocalityData()
-        //return group
         
         let provincialSummary = "/summary?prov/"
         guard let apiURL = URL(string: apiURLString + provincialSummary) else {
@@ -184,40 +175,8 @@ class CovidViewModel : ObservableObject, LocationDelegate {
                     if let url = Bundle.main.url(forResource: "canadacities", withExtension: "json") {
                         let data = try Data(contentsOf: url)
                         let cityDecoder = JSONDecoder()
-                        
-                        cityDecoder.userInfo[CodingUserInfoKey.context!] = self.moc //self.persistentContainer.viewContext
-                        let decodedLocalities = try cityDecoder.decode([Locality].self, from: data)
-                        
-                        let provincialSummary = "/summary?prov/"
-                        guard let apiURL = URL(string: self.apiURLString + provincialSummary) else {
-                            print(#function, "Problem with API URL:\n\n\(self.apiURLString + provincialSummary)\n\n")
-                            return //group
-                        }
-                        
-                        DispatchQueue.main.async {
-                            var decodedProvincialSummary: ProvincialSummary?
-                            
-                            group.enter()
-                            URLSession.shared.dataTask(with: apiURL){(data: Data?, response: URLResponse?, error: Error?) in
-                                if let e = error {
-                                    print(#function, "Error \(e)")
-                                } else {
-                                    do {
-                                        if let jsonData = data {
-                                            let provincialSummaryDecoder = JSONDecoder()
-                                            decodedProvincialSummary = try provincialSummaryDecoder.decode(ProvincialSummary.self, from: jsonData)
-                                        } else {
-                                            print(#function, "JSON data is empty")
-                                        }
-                                    } catch let error {
-                                        print(#function, "Error decoding data: \(error)")
-                                    }
-                                }
-                                group.leave()
-                            }.resume()
-                            group.wait()
-                            self.registerLocalityData(locs: decodedLocalities, decodedProvincialSummary: decodedProvincialSummary)
-                        }
+                        cityDecoder.userInfo[CodingUserInfoKey.context!] = self.moc
+                       self.registerLocalityData(locs: try cityDecoder.decode([Locality].self, from: data), decodedProvincialSummary: decodedProvincialSummary)
                     } else {
                         print(#function, "JSON data is empty")
                     }
