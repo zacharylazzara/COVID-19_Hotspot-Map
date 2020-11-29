@@ -18,18 +18,25 @@ struct ProvincialSummaryView: View {
             Text("\(covidViewModel.getCurrentLocality()?.name ?? "N/A") Population:\t\t\t\t\(Image(systemName: "person.crop.circle"))\t\(covidViewModel.getCurrentLocality()?.population ?? 0)")
             Text("Population Density:\t\t\t\t\(Image(systemName: "rectangle.stack.person.crop"))\t\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.density ?? 0))\n")
             
-            Text("COVID-19 Information").fontWeight(.bold)
+            Text("COVID-19 Statistics").fontWeight(.bold)
             Text("Threat Level:\t\t\t\t\t\t\(Image(systemName: "waveform.path.ecg"))\t\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.threatLevel ?? 0))")
             Text("\(covidViewModel.getCurrentLocality()?.province ?? "N/A") Reported Cases:\t\t\t\(Image(systemName: "cross.fill"))\t\(covidViewModel.getCurrentLocality()?.provinceCases ?? 0)")
             
             Text("\(covidViewModel.getCurrentLocality()?.name ?? "N/A") Estimated Cases:\t\t\t\(Image(systemName: "cross.circle.fill"))\t\(covidViewModel.getCurrentLocality()?.covidCases ?? 0)")
             
+            Divider().padding(.top).padding(.bottom)
+            Text("Symptoms\n").fontWeight(.bold)
+            
+            // Symptom information obtained from: https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/symptoms.html#s
+            Text("\(Image(systemName: "chevron.right.circle"))\tNew or worsening cough\n\(Image(systemName: "chevron.right.circle"))\tShortness of breath or difficulty breathing\n\(Image(systemName: "chevron.right.circle"))\tTemperature equal to or over 38°C\n\(Image(systemName: "chevron.right.circle"))\tFeeling feverish\n\(Image(systemName: "chevron.right.circle"))\tChills\n\(Image(systemName: "chevron.right.circle"))\tFatigue or weakness\n\(Image(systemName: "chevron.right.circle"))\tMuscle or body aches\n\(Image(systemName: "chevron.right.circle"))\tNew loss of smell or taste\n\(Image(systemName: "chevron.right.circle"))\tHeadache\n\(Image(systemName: "chevron.right.circle"))\tGastrointestinal symptoms\n\(Image(systemName: "chevron.right.circle"))\tFeeling very unwell")
         }.padding()
-        
-        // TODO: add trend graphs here perhaps? Also we should pull mortality data from the API and save to CoreData as well so we can access it here, so we can provide mortality information.
-        
         Spacer()
-        // TODO: put a link to government website or a phone number for COVID-19 help here?
+        VStack(alignment: .center) {
+            Image(systemName: "exclamationmark.triangle").foregroundColor(.red)
+            Text("COVID-19 can spread asymptomatically").foregroundColor(.red).fontWeight(.bold)
+            Text("Symptoms may take up to 14 days to appear").fontWeight(.thin)
+        }
+        Spacer()
     }
 }
 
