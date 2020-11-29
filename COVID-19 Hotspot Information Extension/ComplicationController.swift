@@ -54,7 +54,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         //let template = CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText(gaugeProvider: gaugeProvider, bottomTextProvider: localCases, centerTextProvider: localCases)
         
-        var entries = [CLKComplicationTimelineEntry]()
+        let entries = [CLKComplicationTimelineEntry]()
         //entries.append(CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template))
         handler(entries.first)
     }

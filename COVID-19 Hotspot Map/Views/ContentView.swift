@@ -9,7 +9,7 @@ import SwiftUI
 
 // TODO: look into https://projectpandemic.concordia.ca/ and see if they have an API?
 // TODO: for some regions the numbers are way off; we should get the numbers by health region instead of by province
-
+// TODO: we should get R0 and Re from an API, and use them for our calculations
 
 struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
