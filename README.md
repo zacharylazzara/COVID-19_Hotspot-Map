@@ -3,4 +3,4 @@
 **Screenshots:**
 
 
-<img src="screenshots/mapview.png"  width="200" height="400" />
+<img src="Screenshots/mapview.png"  width="200" height="400" />
