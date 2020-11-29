@@ -10,9 +10,26 @@
 import SwiftUI
 
 struct ProvincialSummaryView: View {
+    @EnvironmentObject var covidViewModel: CovidViewModel
+    
     var body: some View {
-        Text("This will be a summary of the province's COVID-19 cases; it'll include things like the mortality rate, number of deaths, number of recovered, cumulative cases, active cases, etc; basically everything we get from the API as well as some information we determine for ourselves. Might want to include graphs to show trends and such. It should also mention the risk score, which is the score displayed in the icon we clicked on").padding()
+        VStack(alignment: .leading) {
+            Text("Population Information").fontWeight(.bold)
+            Text("\(covidViewModel.getCurrentLocality()?.name ?? "N/A") Population:\t\t\t\t\(Image(systemName: "person.crop.circle"))\t\(covidViewModel.getCurrentLocality()?.population ?? 0)")
+            Text("Population Density:\t\t\t\t\(Image(systemName: "rectangle.stack.person.crop"))\t\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.density ?? 0))\n")
+            
+            Text("COVID-19 Information").fontWeight(.bold)
+            Text("Threat Level:\t\t\t\t\t\t\(Image(systemName: "waveform.path.ecg"))\t\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.threatLevel ?? 0))")
+            Text("\(covidViewModel.getCurrentLocality()?.province ?? "N/A") Reported Cases:\t\t\t\(Image(systemName: "cross.fill"))\t\(covidViewModel.getCurrentLocality()?.provinceCases ?? 0)")
+            
+            Text("\(covidViewModel.getCurrentLocality()?.name ?? "N/A") Estimated Cases:\t\t\t\(Image(systemName: "cross.circle.fill"))\t\(covidViewModel.getCurrentLocality()?.covidCases ?? 0)")
+            
+        }.padding()
+        
+        // TODO: add trend graphs here perhaps? Also we should pull mortality data from the API and save to CoreData as well so we can access it here, so we can provide mortality information.
+        
         Spacer()
+        // TODO: put a link to government website or a phone number for COVID-19 help here?
     }
 }
 

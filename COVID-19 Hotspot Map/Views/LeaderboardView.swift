@@ -11,6 +11,8 @@
 import SwiftUI
 
 struct LeaderboardView: View {
+    @EnvironmentObject var covidViewModel: CovidViewModel
+    
     var body: some View {
         Text("This will be the leaderboard view; it needs to display a list of cities grouped into provinces, with the city with the most cases at the top of the list. There's a lot of cities though so you might wanna do something so they're not all displayed at once; maybe just the top 5 or 10 of each province (and the user's current province should be first probably)").padding()
         Spacer()

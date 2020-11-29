@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    //var covidViewModel = CovidViewModel()
+    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //var covidViewModel = CovidViewModel(context: context)
     
     var body: some View {
         VStack {

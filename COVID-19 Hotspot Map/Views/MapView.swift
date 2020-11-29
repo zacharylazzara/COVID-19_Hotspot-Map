@@ -37,6 +37,8 @@ struct MapView: UIViewRepresentable {
         map.isZoomEnabled = true
         map.isScrollEnabled = true
         map.isUserInteractionEnabled = true
+        //map.cameraZoomRange = CameraZoomRange(1, 5) // It doesn't work and I don't know why so I'm not doing it right now its just not worth it.
+        //map.setCameraZoomRange(CLLocationDistance(5), animated: true)
         
         let sourceCoordinates = CLLocationCoordinate2D(latitude: self.locationManager.lat, longitude: self.locationManager.lng)
         let region = MKCoordinateRegion(center: sourceCoordinates, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)

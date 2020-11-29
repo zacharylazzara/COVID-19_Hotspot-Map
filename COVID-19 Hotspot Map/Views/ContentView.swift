@@ -16,26 +16,15 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                MapView(localities: covidViewModel.getLocalities())
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(height: UIScreen.main.bounds.height)
-                VStack(alignment: .leading){
+            ZStack(alignment: .leading) {
+                MapView(localities: covidViewModel.getLocalities()).ignoresSafeArea()
+                VStack(alignment: .leading) {
+                    Text("\(Image(systemName: "cross.fill"))\t\(covidViewModel.getCurrentLocality()?.provinceCases ?? 0)")
+                    Text("\(Image(systemName: "cross.circle.fill"))\t\(covidViewModel.getCurrentLocality()?.covidCases ?? 0)")
                     Spacer()
-                    
-
-                    // TODO: right align numbers
-                    HStack{
-                        Text("Provincial Cases:\t\t\t")
-                        Text("\(covidViewModel.getCurrentLocality()?.provinceCases ?? 0)") // right align this
-                    }
-                    HStack{
-                        Text("Estimated Local Cases:\t")
-                        Text("\(covidViewModel.getCurrentLocality()?.covidCases ?? 0)") // right align this
-                    }
-                }.padding(.bottom, 90)
+                }.padding()
             }
-            .navigationBarTitle(Text("\(covidViewModel.getCurrentLocality()?.name ?? "Unknown"), \(covidViewModel.getCurrentLocality()?.province ?? "Unknown")"), displayMode: .inline)
+            .navigationBarTitle(Text("\(covidViewModel.getCurrentLocality()?.name ?? "N/A"), \(covidViewModel.getCurrentLocality()?.province ?? "N/A")"), displayMode: .inline)
             .navigationBarItems(
                 leading: HStack {
                     NavigationLink(
