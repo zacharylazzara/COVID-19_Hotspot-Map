@@ -17,7 +17,12 @@ struct MapView: UIViewRepresentable {
     private var localityAnnotations: [LocalityAnnotation] = [LocalityAnnotation]()
     private var localities: [Locality] = [Locality]()
     
-    init(localities: [String:Locality]) {
+    @Binding var showInfo: Bool
+    @Binding var infoLoc: Locality?
+    
+    init(localities: [String:Locality], showInfo: Binding<Bool>, infoLoc: Binding<Locality?>) {
+        self._showInfo = showInfo
+        self._infoLoc = infoLoc
         for (key, locality) in localities {
             self.localityCoordinates[key] = CLLocationCoordinate2D(latitude: locality.lat, longitude: locality.lng)
             self.localityAnnotations.append(LocalityAnnotation(locality: locality))
@@ -26,7 +31,7 @@ struct MapView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> MapView.Coordinator {
-        return MapView.Coordinator()
+        return MapView.Coordinator(showInfo: self.$showInfo, infoLoc: self.$infoLoc)
     }
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
@@ -68,6 +73,15 @@ struct MapView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
+        @Binding var showInfo: Bool
+        @Binding var infoLoc: Locality?
+        
+        init(showInfo: Binding<Bool>, infoLoc: Binding<Locality?>) {
+            self._showInfo = showInfo
+            self._infoLoc = infoLoc
+            super.init()
+        }
+        
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
                 if overlay is MKCircle {
                     let renderer = MKCircleRenderer(overlay: overlay)
@@ -84,20 +98,24 @@ struct MapView: UIViewRepresentable {
             guard let annotation = annotation as? LocalityAnnotation else { return nil }
             let identifier = "Locality"
             
-            var view = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            var localityPlacemark = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
             
-            if (view == nil) {
-                view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view!.image = UIImage(systemName: "cross.circle.fill") // TODO: colour code this?
-                view!.canShowCallout = true
+            if (localityPlacemark == nil) {
+                localityPlacemark = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                localityPlacemark!.image = UIImage(systemName: "cross.circle.fill") // TODO: colour code this?
+                localityPlacemark!.canShowCallout = true
+                localityPlacemark!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) // TODO: needs to bring us to a detail page
             } else {
-                view!.annotation = annotation
+                localityPlacemark?.annotation = annotation
             }
             
-            view!.canShowCallout = true
-            view!.rightCalloutAccessoryView = UIButton(type: .infoDark) // TODO: needs to bring us to a detail page
-            
-            return view
+            return localityPlacemark
+        }
+        
+        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            guard let localityPlacemark = view.annotation as? LocalityAnnotation else { return }
+            self.showInfo.toggle()
+            self.infoLoc = localityPlacemark.locality
         }
     }
 }

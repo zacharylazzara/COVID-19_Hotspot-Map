@@ -14,10 +14,21 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
     
+    @State var showInfo: Bool = false
+    @State var infoLoc: Locality?
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .leading) {
-                MapView(localities: covidViewModel.getLocalities()).ignoresSafeArea()
+                MapView(localities: covidViewModel.getLocalities(), showInfo: $showInfo, infoLoc: $infoLoc).ignoresSafeArea().actionSheet(isPresented: self.$showInfo) {
+                    ActionSheet(title: Text("\(infoLoc?.name ?? "N/A")"), message: Text("Estimated COVID-19 Cases: \(infoLoc?.covidCases ?? 0)"), buttons: [.default(Text("Dismiss"))])
+                }
+                
+                
+                
+                
+                
+                
                 VStack(alignment: .leading) {
                     Text("\(Image(systemName: "cross.fill"))\t\(covidViewModel.getCurrentLocality()?.provinceCases ?? 0)")
                     Text("\(Image(systemName: "cross.circle.fill"))\t\(covidViewModel.getCurrentLocality()?.covidCases ?? 0)")
