@@ -5,8 +5,6 @@
 //  Created by Zachary Lazzara on 2020-11-21.
 //
 
-// Toronto Coordinates: 43.6532, -79.3832
-
 import Foundation
 import CoreLocation
 import MapKit
@@ -18,9 +16,9 @@ protocol LocationDelegate {
 class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     
-    @Published public var lat: Double = 0
-    @Published public var lng: Double = 0
-    
+    // Set to Sheridan College Trafalgar as default coordinates
+    @Published public var lat: Double = 43.4684
+    @Published public var lng: Double = -79.6991
     
     public var delegate:LocationDelegate?
     
@@ -80,7 +78,7 @@ extension LocationManager: CLLocationManagerDelegate {
         lng = (manager.location?.coordinate.longitude) ?? 0
         
         let geoCoder = CLGeocoder()
-        let location = CLLocation(latitude: lat , longitude: lng )
+        let location = CLLocation(latitude: lat, longitude: lng)
         
         geoCoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
             let loc = placemarks?[0].locality
