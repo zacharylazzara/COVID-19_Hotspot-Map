@@ -42,6 +42,7 @@ struct MapView: UIViewRepresentable {
         map.isZoomEnabled = true
         map.isScrollEnabled = true
         map.isUserInteractionEnabled = true
+        //map.userTrackingMode = MKUserTrackingMode.none
         //map.cameraZoomRange = CameraZoomRange(1, 5) // It doesn't work and I don't know why so I'm not doing it right now its just not worth it.
         //map.setCameraZoomRange(CLLocationDistance(5), animated: true)
         
@@ -116,6 +117,11 @@ struct MapView: UIViewRepresentable {
             guard let localityPlacemark = view.annotation as? LocalityAnnotation else { return }
             self.showInfo.toggle()
             self.infoLoc = localityPlacemark.locality
+            
+            // TODO: the map view jumps back to the user location when the view displays; we need to prevent that somehow
+            
+            //let center = CLLocationCoordinate2D(latitude: infoLoc?.lat ?? 0, longitude: infoLoc?.lng ?? 0)
+            //mapView.setCenter(center, animated: true)
         }
     }
 }
