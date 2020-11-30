@@ -3,4 +3,6 @@
 **Screenshots:**
 
 
-<img src="Screenshots/Simulator Screen Shot - iPhone 11 - 2020-11-24 at 12.35.03.png"  width="200" height="400" />
+<img src="Screenshots/mapview.png"  width="200" height="400" />
+
+<img src="Screenshots/detailview.png"  width="200" height="400" />
