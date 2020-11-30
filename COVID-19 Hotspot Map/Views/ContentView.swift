@@ -21,14 +21,8 @@ struct ContentView: View {
         NavigationView {
             ZStack(alignment: .leading) {
                 MapView(localities: covidViewModel.getLocalities(), showInfo: $showInfo, infoLoc: $infoLoc).ignoresSafeArea().actionSheet(isPresented: self.$showInfo) {
-                    ActionSheet(title: Text("\(infoLoc?.name ?? "N/A")"), message: Text("Estimated COVID-19 Cases: \(infoLoc?.covidCases ?? 0)"), buttons: [.default(Text("Dismiss"))])
+                    ActionSheet(title: Text("COVID-19 Information for \(infoLoc?.name ?? "N/A")"), message: Text("Population: \(infoLoc?.population ?? 0)\nPopulation Density: \(String(format:"%.2f", infoLoc?.density ?? 0))\nEstimated Threat Level: \(String(format:"%.2f", infoLoc?.threatLevel ?? 0))\nReported Provincial Cases: \(infoLoc?.provinceCases ?? 0)\nEstimated Local Cases: \(infoLoc?.covidCases ?? 0)"), buttons: [.default(Text("Dismiss"))])
                 }
-                
-                
-                
-                
-                
-                
                 VStack(alignment: .leading) {
                     Text("\(Image(systemName: "cross.fill"))\t\(covidViewModel.getCurrentLocality()?.provinceCases ?? 0)")
                     Text("\(Image(systemName: "cross.circle.fill"))\t\(covidViewModel.getCurrentLocality()?.covidCases ?? 0)")
