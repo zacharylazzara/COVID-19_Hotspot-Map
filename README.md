@@ -1,11 +1,11 @@
 # COVID-19_Hotspot-Map
 
-**App Name:** COVID-19 Hotspot Map
+**App Name:** COVID-19 Hotspot Map <br/>
 **Group #2:** Zachary (991 349 781), Yaun (991 470 659)
 
 **Date:** November 30, 2020
 
-**Work Distribution:**
+**Work Distribution:**<br/>
 Zachary:
 - CoreData
 - Location Services
@@ -20,10 +20,10 @@ Yuan:
 - History View/plot previous locations on map
 - Add French localizations
 
-**Purpose:**
+**Purpose:**<br/>
 The purpose of this app is to display a heatmap of COVID-19 cases across Canada and inform the user whether they’re in a probable hotspot or not (since information on cases are not posted by city we have to make predictions based on population size and density).
 
-**Target Audience:**
+**Target Audience:**<br/>
 Everyone, especially at-risk individuals who would benefit from the access to this valuable information.
 
 **Main Features:**
@@ -55,7 +55,7 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 -	HistoryView
 -	RankView
 
-**Use-Cases**
+**Use-Cases**<br/>
 View Ranking:
 1.	The user can view a sorted list of which localities rank highest for COVID-19 cases, grouped by province
 
