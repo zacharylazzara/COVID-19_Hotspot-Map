@@ -16,9 +16,9 @@ protocol LocationDelegate {
 class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     
-    // Set to Sheridan College Trafalgar as default coordinates
-    @Published public var lat: Double = 43.4684
-    @Published public var lng: Double = -79.6991
+    // Set to Sheridan College Trafalgar as default coordinates? (doesn't seem to work consistently; will implement later)
+    @Published public var lat: Double = 0// 43.4684
+    @Published public var lng: Double = 0// -79.6991
     
     public var delegate:LocationDelegate?
     
