@@ -16,7 +16,9 @@ Zachary:
 Yuan:
 - Data visualization (heatmap/data overlays on map)
 - Widget
-- Leaderboard/top 10 view
+- Notification fixed
+- Province View
+- Province Cities View
 - History View/plot previous locations on map
 - Add French localizations
 
@@ -56,8 +58,8 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 -	RankView
 
 **Use-Cases**<br/>
-View Ranking:
-1.	The user can view a sorted list of which localities rank highest for COVID-19 cases, grouped by province
+View Cities:
+1.	The user can view a sorted list of cities grouped by province, and search for their cities on the search bar
 
 View Heatmap:
 1.	The first view the user is presented with is the heatmap; this view shows the user’s current location on a heatmap of COVID-19 cases by locality
