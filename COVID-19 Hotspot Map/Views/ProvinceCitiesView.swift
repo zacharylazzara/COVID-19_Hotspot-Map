@@ -18,4 +18,17 @@ struct ProvinceCitiesView: View {
     private var localities: [String: Locality] = [String: Locality]()
     private var localityList: [Locality] = [Locality]()
     private var selectedProvince: String = ""
+    
+    init(localities: [String: Locality], selectedProvince: String) {
+        self.localities = localities
+        self.selectedProvince = selectedProvince
+        
+        for (_ , locacity) in localities {
+            if let province = locacity.province  {
+                if province == selectedProvince {
+                    localityList.append(locacity)
+                }
+            }
+        }
+    }
 }
