@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AE206808257E9D2200F36079 /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE206807257E9D2200F36079 /* NavigationHelper.swift */; };
+		AE206810257EA06E00F36079 /* ProvinceCitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE20680F257EA06E00F36079 /* ProvinceCitiesView.swift */; };
 		B61D09632570A1CB00734CEF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B61D09612570A1CB00734CEF /* Interface.storyboard */; };
 		B61D09652570A1CE00734CEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B61D09642570A1CE00734CEF /* Assets.xcassets */; };
 		B61D096C2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B61D096B2570A1CE00734CEF /* COVID-19 Hotspot Information Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		AE206807257E9D2200F36079 /* NavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
+		AE20680F257EA06E00F36079 /* ProvinceCitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvinceCitiesView.swift; sourceTree = "<group>"; };
 		B61D095F2570A1CB00734CEF /* COVID-19 Hotspot Information.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19 Hotspot Information.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B61D09622570A1CB00734CEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		B61D09642570A1CE00734CEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				B67DCFBE256D097A00A3DBA6 /* ProvincesView.swift */,
 				B67DCFC1256D13A700A3DBA6 /* ProvincialSummaryView.swift */,
 				B67DCFC4256D454C00A3DBA6 /* MapView.swift */,
+				AE20680F257EA06E00F36079 /* ProvinceCitiesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				B67DCF2A2569B23800A3DBA6 /* Province.swift in Sources */,
 				AE206808257E9D2200F36079 /* NavigationHelper.swift in Sources */,
 				B63872492569887100174C71 /* LocationManager.swift in Sources */,
+				AE206810257EA06E00F36079 /* ProvinceCitiesView.swift in Sources */,
 				B63872282569879C00174C71 /* SceneDelegate.swift in Sources */,
 				B67DCF572569F67B00A3DBA6 /* Locality.swift in Sources */,
 				B638722A2569879C00174C71 /* ContentView.swift in Sources */,
