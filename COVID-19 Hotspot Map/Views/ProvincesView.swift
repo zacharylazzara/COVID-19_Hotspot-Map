@@ -36,11 +36,6 @@ struct ProvincesView: View {
                 }
             }
         }
-        .onReceive(self.navigationHelper.$showRoot) { (popToRootView) in
-            if popToRootView {
-                presentationMode.wrappedValue.dismiss()
-            }
-        }
 
     }
 }

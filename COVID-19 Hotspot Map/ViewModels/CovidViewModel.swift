@@ -24,6 +24,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     
     @Published private var localities:[String:Locality] = [:] // This is a dictionary of all localities in Canada
     @Published private var currentLocality: Locality? // This is where the user is currently located
+    @Published var currentLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     
     init(context: NSManagedObjectContext) {
         moc = context
@@ -42,6 +43,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         currentLocality = localities[loc] ?? nil
     }
     
+    
     func getCurrentLocality() -> Locality? {
         return currentLocality
     }
@@ -49,6 +51,10 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     func getLocalities() -> [String:Locality] {
         return localities
     }
+    func setCurrentLocation(loc: CLLocationCoordinate2D) {
+        currentLocation = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
+    }
+    
     
     // TODO: we'll probably use densities (for the city not province) to determine probability of infection (it will determine danger score)
     

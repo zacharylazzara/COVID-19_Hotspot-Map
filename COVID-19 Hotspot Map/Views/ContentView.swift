@@ -47,11 +47,7 @@ struct ContentView: View {
             
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .onReceive(self.navigationHelper.$showRoot) { (popToRootView) in
-            if popToRootView {
-                self.resetNavView()
-            }
-        }
+
     }
     func resetNavView(){
         self.$navigationHelper.showRoot.wrappedValue = false
