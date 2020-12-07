@@ -51,6 +51,8 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     func getLocalities() -> [String:Locality] {
         return localities
     }
+    
+    //added this function to get the current location
     func setCurrentLocation(loc: CLLocationCoordinate2D) {
         currentLocation = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
     }
