@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ProvinceCitiesView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct ProvinceCitiesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProvinceCitiesView()
-    }
+    @EnvironmentObject var covidViewModel: CovidViewModel
+    @EnvironmentObject var navigationHelper: NavigationHelper
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State private var searchText: String = ""
+    
+    private var localities: [String: Locality] = [String: Locality]()
+    private var localityList: [Locality] = [Locality]()
+    private var selectedProvince: String = ""
 }
