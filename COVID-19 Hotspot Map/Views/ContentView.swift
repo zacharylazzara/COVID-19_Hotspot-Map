@@ -7,14 +7,11 @@
 
 import SwiftUI
 
-// TODO: look into https://projectpandemic.concordia.ca/ and see if they have an API?
-// TODO: for some regions the numbers are way off; we should get the numbers by health region instead of by province
-// TODO: we should get R0 and Re from an API, and use them for our calculations
-// TODO: prevent camera from centring back on user when a popup is presented; centre over the locality that generated the popup instead
 
 struct ContentView: View {
     @EnvironmentObject var covidViewModel: CovidViewModel
-    
+    @EnvironmentObject var navigationHelper: NavigationHelper
+
     @State var showInfo: Bool = false
     @State var infoLoc: Locality?
     
@@ -40,13 +37,9 @@ struct ContentView: View {
                         }).foregroundColor(.red) // TODO: we should colour code this based on how it compares to all other regions
                 },
                 trailing: HStack {
-                    // TODO: we should probably put a menu here and have the leaderboard and settings accessible via the hamburger menu, as these are unlikely to be accessed as frequently by the user
-                    NavigationLink(
-                        destination: LeaderboardView(),
-                        label: {
-                            Image(systemName: "list.number")
-                        })
-                    
+                    NavigationLink(destination: ProvincesView(localities: covidViewModel.getLocalities())) {
+                        Image(systemName: "list.number")
+                    }
                 })
             .navigationBarBackButtonHidden(true)
         }.onAppear {
@@ -54,6 +47,8 @@ struct ContentView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
+    
+
 }
 
 struct ContentView_Previews: PreviewProvider {

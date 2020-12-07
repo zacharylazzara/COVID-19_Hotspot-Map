@@ -15,11 +15,10 @@ Zachary:
 
 Yuan:
 - Data visualization (heatmap/data overlays on map)
-- Province Selection View
-- Province Cities View
-- WatchOS
-- Notification View debug
-
+- Widget
+- Leaderboard/top 10 view
+- History View/plot previous locations on map
+- Add French localizations
 
 **Purpose:**<br/>
 The purpose of this app is to display a heatmap of COVID-19 cases across Canada and inform the user whether they’re in a probable hotspot or not (since information on cases are not posted by city we have to make predictions based on population size and density).
@@ -30,15 +29,12 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 **Main Features:**
 - View estimated number of active COVID-19 cases per city
 -	See a heat map of active Canadian COVID-19 cases
--	View a cities within the pronvince includes their associated risk scores, and search for your city
+-	View a leaderboard of the worst hit cities and provinces (includes their associated risk scores)
 -	View a risk score for your location
 
 **iOS Services and Functionality:**
-- List
-- Gesture
 -	CoreData
-- VStack, HStack and ZStack
--	WatchOS
+-	Widget
 -	Location Services
 -	Views
 -	NavigationView
@@ -49,20 +45,19 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 -	Locality
 -	Province
 -	ProvincialSummary
+-	Checkpoint
 
 **ViewModels:**
 -	CovidViewModel
 
 **Views:**
 -	MapView
--	ProvincialSummaryView
-- PronvinceSelectionView
--	ProvinceCitiesView
+-	HistoryView
+-	RankView
 
 **Use-Cases**<br/>
-View Cities:
-1.	The user can view a sorted list of cities grouped by province, and search for their cities on the search bar
-2.  When tapped on the selected city, it will navigate back to the home screen, with the updated location
+View Ranking:
+1.	The user can view a sorted list of which localities rank highest for COVID-19 cases, grouped by province
 
 View Heatmap:
 1.	The first view the user is presented with is the heatmap; this view shows the user’s current location on a heatmap of COVID-19 cases by locality
