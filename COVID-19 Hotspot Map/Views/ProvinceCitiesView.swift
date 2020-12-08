@@ -32,6 +32,8 @@ struct ProvinceCitiesView: View {
         }
     }
     var body: some View {
+        
+        //search bar here
         VStack(spacing: 0.0) {
             List {
                 ForEach(self.localityList.filter({ searchText.isEmpty ? true : $0.name!.contains(searchText) }), id: \.self) { locality in

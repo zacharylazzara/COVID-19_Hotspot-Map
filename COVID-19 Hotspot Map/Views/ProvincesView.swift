@@ -12,6 +12,7 @@ struct ProvincesView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     private var localities: [String: Locality] = [String: Locality]()
     private var provinces: [String] = [String]()
+
     
     init(localities: [String: Locality]) {
         self.localities = localities
@@ -24,6 +25,7 @@ struct ProvincesView: View {
             }
         }
     }
+
     
     var body: some View {
 
@@ -31,7 +33,13 @@ struct ProvincesView: View {
             List {
                 ForEach(self.provinces, id: \.self) { province in
                     NavigationLink(destination: ProvinceCitiesView(localities: self.localities, selectedProvince: province)) {
-                        Text(province)
+                        ZStack{
+                            Image("ON")
+                                .resizable()
+                                .scaledToFit()
+                            
+                            Text(province).font(.title2).fontWeight(.bold).foregroundColor(Color.white)
+                        }
                     }
                 }
             }
