@@ -35,6 +35,8 @@ struct ProvinceCitiesView: View {
         
         //search bar here
         VStack(spacing: 0.0) {
+            SearchBarView(text: $searchText)
+                .padding([.top, .bottom])
             List {
                 ForEach(self.localityList.filter({ searchText.isEmpty ? true : $0.name!.contains(searchText) }), id: \.self) { locality in
                     ZStack {
