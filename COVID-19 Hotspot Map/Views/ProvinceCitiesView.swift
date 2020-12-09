@@ -71,10 +71,15 @@ struct ProvinceCitiesView: View {
                         
                         Color.white.opacity(0.01)
                             .onTapGesture {
+                                covidViewModel.currentLocation = CLLocationCoordinate2D(latitude: locality.lat, longitude: locality.lng)
+                                navigationHelper.showRoot = true
+                                presentationMode.wrappedValue.dismiss()
                             }
                     }
                 }
             }
         }
+        
+        .navigationTitle("Please Select or Search for a city")
     }
 }

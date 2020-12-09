@@ -42,9 +42,11 @@ struct ContentView: View {
                     }
                 })
             .navigationBarBackButtonHidden(true)
-            
-        }.onAppear {
-            
+            .onReceive(self.navigationHelper.$showRoot) { (popToRootView) in
+                if popToRootView {
+                    self.resetNavView()
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
 

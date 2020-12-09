@@ -37,20 +37,21 @@ struct ProvincesView: View {
                                 .renderingMode(.original)
                                 .resizable()
                                 .scaledToFit()
-//                                .frame(height: 90, alignment: .center)
-                                
-                                
-                            
-                            
                             Text(province).font(.title2).fontWeight(.bold).foregroundColor(Color.white)
                         }
                     }
                 }
             }
         }
-        
+        .navigationTitle("We Are In This Together")
+        .onReceive(self.navigationHelper.$showRoot) { (popToRootView) in
+            if popToRootView {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
 
     }
+    
     
     
 }
