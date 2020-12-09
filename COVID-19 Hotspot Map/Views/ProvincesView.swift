@@ -12,7 +12,6 @@ struct ProvincesView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     private var localities: [String: Locality] = [String: Locality]()
     private var provinces: [String] = [String]()
-
     
     init(localities: [String: Locality]) {
         self.localities = localities
@@ -34,9 +33,14 @@ struct ProvincesView: View {
                 ForEach(self.provinces, id: \.self) { province in
                     NavigationLink(destination: ProvinceCitiesView(localities: self.localities, selectedProvince: province)) {
                         ZStack{
-                            Image("ON")
+                            Image("\(province)")
+                                .renderingMode(.original)
                                 .resizable()
                                 .scaledToFit()
+                                .frame(height: 90, alignment: .center)
+                                
+                                
+                            
                             
                             Text(province).font(.title2).fontWeight(.bold).foregroundColor(Color.white)
                         }
@@ -44,8 +48,9 @@ struct ProvincesView: View {
                 }
             }
         }
+        
 
     }
+    
+    
 }
-
-
