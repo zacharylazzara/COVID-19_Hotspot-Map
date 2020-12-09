@@ -37,7 +37,7 @@ struct ProvincesView: View {
                                 .renderingMode(.original)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 90, alignment: .center)
+//                                .frame(height: 90, alignment: .center)
                                 
                                 
                             
