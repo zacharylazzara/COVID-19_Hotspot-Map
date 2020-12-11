@@ -14,11 +14,11 @@ Zachary:
 - Detail view
 
 Yuan:
-- Data visualization (heatmap/data overlays on map)
-- Widget
-- Leaderboard/top 10 view
-- History View/plot previous locations on map
-- Add French localizations
+- Watch OS Connectivity
+- Watch OS Content View / Complication
+- ProvinceCitiesView
+- ProvincesView
+- Navigation to currentLocation from ProvinceCitiesView
 
 **Purpose:**<br/>
 The purpose of this app is to display a heatmap of COVID-19 cases across Canada and inform the user whether they’re in a probable hotspot or not (since information on cases are not posted by city we have to make predictions based on population size and density).
@@ -34,30 +34,38 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 
 **iOS Services and Functionality:**
 -	CoreData
--	Widget
+-	Watch OS
 -	Location Services
 -	Views
 -	NavigationView
 -	MapView
 -	API Access
+- List
+- Z Stack / V Stack / H Stack
+- Gesture
+
 
 **Entities:**
 -	Locality
 -	Province
 -	ProvincialSummary
--	Checkpoint
 
 **ViewModels:**
 -	CovidViewModel
 
 **Views:**
 -	MapView
--	HistoryView
--	RankView
+-	ProvincialSummaryView
+-	ProvincesView
+- ProvinceCitiesView
+- SearchBar
+- ContentView
+- ContentView (Watch OS)
+- Complication display (Watch OS)
 
 **Use-Cases**<br/>
-View Ranking:
-1.	The user can view a sorted list of which localities rank highest for COVID-19 cases, grouped by province
+View Cities:
+1.	The user can view a sorted list of cities within the province, and navigate to the map location on tap
 
 View Heatmap:
 1.	The first view the user is presented with is the heatmap; this view shows the user’s current location on a heatmap of COVID-19 cases by locality
@@ -66,6 +74,8 @@ View Heatmap:
 View Details:
 1.	The user can view their details, such as their COVID-19 risk-score; this score is based on the population density and the predicted cases for the areas the user has been; it takes into account the user’s history within the past 14 days
 
+View On Watch OS:
+1.  The user can view the updated information / suggestion based on their current location on watch OS and it's complication
 
 
 
