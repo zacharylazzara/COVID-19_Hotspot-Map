@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-import WatchConnectivity
+import WatchConnectivity //added watch connectivity
 
 // TODO: some locations aren't getting data, such as Vancouver (must be a problem matching the strings?)
 
