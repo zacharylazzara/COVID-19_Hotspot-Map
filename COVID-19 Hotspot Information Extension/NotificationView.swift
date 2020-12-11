@@ -2,7 +2,7 @@
 //  NotificationView.swift
 //  COVID-19 Hotspot Information Extension
 //
-//  Created by Zachary Lazzara on 2020-11-26.
+//  Created by Yuna on 2020-12-09.
 //
 
 import SwiftUI

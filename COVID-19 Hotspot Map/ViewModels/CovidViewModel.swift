@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import WatchConnectivity
 
 // TODO: some locations aren't getting data, such as Vancouver (must be a problem matching the strings?)
 
@@ -14,11 +15,13 @@ import CoreData
 
 // TODO: we should pull data from CoreData on initialize if it already exists, otherwise we load from JSON file
 
-class CovidViewModel : ObservableObject, LocationDelegate {
+class CovidViewModel : NSObject, ObservableObject, LocationDelegate, WCSessionDelegate {
     private var apiURLString = "https://api.opencovid.ca/"
-    private var location: LocationManager
+    private var location: LocationManager?
     private var initialized: Bool = false
-    private let moc: NSManagedObjectContext
+    private var moc: NSManagedObjectContext?
+    
+    var session: WCSession?
     
     // TODO: maybe the threat level should scale based on distance from centre of city (coordinates found in our locality json)
     
@@ -27,11 +30,21 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     @Published var currentLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     
     init(context: NSManagedObjectContext) {
+        super.init()
         moc = context
         location = LocationManager()
         initializeLocalityData().notify(queue: .main) {
-            self.location.delegate = self
+            self.location?.delegate = self
             self.initialized = true
+        }
+        self.configureWatchKitSesstion()
+    }
+    
+    func configureWatchKitSesstion() {
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
         }
     }
     
@@ -41,6 +54,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     
     func setCurrentLocality(loc: String) {
         currentLocality = localities[loc] ?? nil
+        sendDataToWatch()
     }
     
     
@@ -55,6 +69,20 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     //added this function to get the current location
     func setCurrentLocation(loc: CLLocationCoordinate2D) {
         currentLocation = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
+    }
+    
+    func sendDataToWatch() {
+        if let validSession = self.session, validSession.isReachable {
+            let cityName = self.getCurrentLocality()?.name ?? " "
+            let threatLevel = self.getCurrentLocality()?.threatLevel ?? 0
+            let cases = self.getCurrentLocality()?.provinceCases ?? 0
+            let data: [String: Any] = [
+                "cityName": cityName,
+                "threatLevel": threatLevel,
+                "NoOfCases": cases
+            ]
+            validSession.sendMessage(data, replyHandler: nil, errorHandler: nil)
+        }
     }
     
     
@@ -107,9 +135,9 @@ class CovidViewModel : ObservableObject, LocationDelegate {
     private func loadLocalityData() {
         let request = NSFetchRequest<Locality>(entityName: "Locality")
         do {
-            let result = try moc.fetch(request)
+            let result = try moc?.fetch(request)
             
-            for locality in result as [Locality] {
+            for locality in result! as [Locality] {
                 self.localities[locality.name!] = locality
             }
         } catch let error as NSError {
@@ -132,7 +160,7 @@ class CovidViewModel : ObservableObject, LocationDelegate {
             }
             
             do { // Save updated infromation to CoreData
-                try self.moc.save()
+                try self.moc?.save()
             } catch {
                 print(error)
             }
@@ -192,4 +220,26 @@ class CovidViewModel : ObservableObject, LocationDelegate {
         }
         return group
     }
+    #if os(iOS)
+    public func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    public func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    #endif
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        print("received message: \(message)")
+        DispatchQueue.main.async { //6
+            if let value = message["watch"] as? String {
+                print(value)
+            }
+        }
+    }
+       
 }

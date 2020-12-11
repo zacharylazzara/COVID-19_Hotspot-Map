@@ -10,6 +10,7 @@
 		AE206808257E9D2200F36079 /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE206807257E9D2200F36079 /* NavigationHelper.swift */; };
 		AE206810257EA06E00F36079 /* ProvinceCitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE20680F257EA06E00F36079 /* ProvinceCitiesView.swift */; };
 		AE4EF680257EF60000ADA310 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4EF67F257EF60000ADA310 /* SearchBar.swift */; };
+		AE80F0762583E39200A5B30E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE80F0752583E39200A5B30E /* ContentViewModel.swift */; };
 		AE849DC425809DA100711D61 /* WatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE849DC325809DA100711D61 /* WatchViewModel.swift */; };
 		AE849DCC25809DAF00711D61 /* WatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE849DC325809DA100711D61 /* WatchViewModel.swift */; };
 		B61D09632570A1CB00734CEF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B61D09612570A1CB00734CEF /* Interface.storyboard */; };
@@ -97,6 +98,7 @@
 		AE206807257E9D2200F36079 /* NavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
 		AE20680F257EA06E00F36079 /* ProvinceCitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvinceCitiesView.swift; sourceTree = "<group>"; };
 		AE4EF67F257EF60000ADA310 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		AE80F0752583E39200A5B30E /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		AE849DC325809DA100711D61 /* WatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchViewModel.swift; sourceTree = "<group>"; };
 		B61D095F2570A1CB00734CEF /* COVID-19 Hotspot Information.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19 Hotspot Information.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B61D09622570A1CB00734CEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				B61D09702570A1CE00734CEF /* HostingController.swift */,
 				B61D09722570A1CE00734CEF /* ContentView.swift */,
+				AE80F0752583E39200A5B30E /* ContentViewModel.swift */,
 				B61D09742570A1CE00734CEF /* ExtensionDelegate.swift */,
 				B61D09762570A1CE00734CEF /* NotificationController.swift */,
 				B61D09782570A1CE00734CEF /* NotificationView.swift */,
@@ -424,6 +427,7 @@
 				B61D09A02570A23700734CEF /* COVID_19_Hotspot_Map.xcdatamodeld in Sources */,
 				B61D09922570A21900734CEF /* LocalityAnnotation.swift in Sources */,
 				B61D09A82570A34600734CEF /* LocationManager.swift in Sources */,
+				AE80F0762583E39200A5B30E /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

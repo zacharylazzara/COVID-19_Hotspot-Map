@@ -1,4 +1,10 @@
 //
+//  NotificationController.swift
+//  COVID-19 Hotspot Information Extension
+//
+//  Created by Yuna on 2020-12-09.
+//
+//
 //import WatchKit
 //import SwiftUI
 //import UserNotifications

@@ -18,7 +18,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .leading) {
-                MapView(localities: covidViewModel.getLocalities(), showInfo: $showInfo, infoLoc: $infoLoc).ignoresSafeArea().actionSheet(isPresented: self.$showInfo) {
+                //added addcurrent locaiton for navigating if user click on another city
+                MapView(localities: covidViewModel.getLocalities(), showInfo: $showInfo, infoLoc: $infoLoc, currentLocation: $covidViewModel.currentLocation).ignoresSafeArea().actionSheet(isPresented: self.$showInfo) {
                     ActionSheet(title: Text("COVID-19 Information for \(infoLoc?.name ?? "N/A")"), message: Text("Population: \(infoLoc?.population ?? 0)\nPopulation Density: \(String(format:"%.2f", infoLoc?.density ?? 0))\nEstimated Threat Level: \(String(format:"%.2f", infoLoc?.threatLevel ?? 0))\nReported Provincial Cases: \(infoLoc?.provinceCases ?? 0)\nEstimated Local Cases: \(infoLoc?.covidCases ?? 0)"), buttons: [.default(Text("Dismiss"))])
                 }
                 VStack(alignment: .leading) {

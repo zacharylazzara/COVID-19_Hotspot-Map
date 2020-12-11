@@ -19,10 +19,14 @@ struct MapView: UIViewRepresentable {
     
     @Binding var showInfo: Bool
     @Binding var infoLoc: Locality?
+    @Binding var currentLocation : CLLocationCoordinate2D
+
     
-    init(localities: [String:Locality], showInfo: Binding<Bool>, infoLoc: Binding<Locality?>) {
+    //edited the signature to include current location
+    init(localities: [String:Locality], showInfo: Binding<Bool>, infoLoc: Binding<Locality?>, currentLocation: Binding<CLLocationCoordinate2D>) {
         self._showInfo = showInfo
         self._infoLoc = infoLoc
+        self._currentLocation = currentLocation
         for (key, locality) in localities {
             self.localityCoordinates[key] = CLLocationCoordinate2D(latitude: locality.lat, longitude: locality.lng)
             self.localityAnnotations.append(LocalityAnnotation(locality: locality))
@@ -31,7 +35,7 @@ struct MapView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> MapView.Coordinator {
-        return MapView.Coordinator(showInfo: self.$showInfo, infoLoc: self.$infoLoc)
+        return MapView.Coordinator(showInfo: self.$showInfo, infoLoc: self.$infoLoc, currentLocation: $currentLocation)
     }
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
@@ -46,7 +50,8 @@ struct MapView: UIViewRepresentable {
         //map.cameraZoomRange = CameraZoomRange(1, 5) // It doesn't work and I don't know why so I'm not doing it right now its just not worth it.
         //map.setCameraZoomRange(CLLocationDistance(5), animated: true)
         
-        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.locationManager.lat, longitude: self.locationManager.lng)
+//        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.locationManager.lat, longitude: self.locationManager.lng)
+        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.currentLocation.latitude, longitude: self.currentLocation.longitude)
         let region = MKCoordinateRegion(center: sourceCoordinates, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         
         map.setRegion(region, animated: true)
@@ -56,7 +61,8 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.locationManager.lat, longitude: self.locationManager.lng)
+//        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.locationManager.lat, longitude: self.locationManager.lng)
+        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.currentLocation.latitude, longitude: self.currentLocation.longitude)
         let region = MKCoordinateRegion(center: sourceCoordinates, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         
         if (covidViewModel.isDataInitialized()) {
@@ -76,10 +82,12 @@ struct MapView: UIViewRepresentable {
     class Coordinator: NSObject, MKMapViewDelegate {
         @Binding var showInfo: Bool
         @Binding var infoLoc: Locality?
+        @Binding var currentLocation : CLLocationCoordinate2D
         
-        init(showInfo: Binding<Bool>, infoLoc: Binding<Locality?>) {
+        init(showInfo: Binding<Bool>, infoLoc: Binding<Locality?>, currentLocation: Binding<CLLocationCoordinate2D>) {
             self._showInfo = showInfo
             self._infoLoc = infoLoc
+            self._currentLocation = currentLocation
             super.init()
         }
         
