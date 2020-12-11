@@ -85,3 +85,12 @@ View On Watch OS:
 <img src="Screenshots/mapview.png"  width="200" height="400" />
 
 <img src="Screenshots/detailview.png"  width="200" height="400" />
+
+<img src="Screenshots/ProvincesView.png"  width="200" height="400" />
+
+<img src="Screenshots/ProvinceCitiesView.png"  width="200" height="400" />
+
+<img src="Screenshots/WatchContentView.png"  width="300" height="300" />
+
+<img src="Screenshots/ComplicationView.png"  width="300" height="300" />
+
