@@ -11,6 +11,7 @@ import MapKit
 
 protocol LocationDelegate {
     func setCurrentLocality(loc: String)
+    func setCurrentLocation(loc: CLLocationCoordinate2D)
 }
 
 class LocationManager: NSObject, ObservableObject {
@@ -66,9 +67,6 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        var lat: Double?
-//        var lng: Double?
-        
         if locations.last != nil {
             lat = (locations.last!.coordinate.latitude)
             lng = (locations.last!.coordinate.longitude)
@@ -83,6 +81,7 @@ extension LocationManager: CLLocationManagerDelegate {
         geoCoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
             let loc = placemarks?[0].locality
             self.delegate?.setCurrentLocality(loc: loc ?? "unavailable")
+            self.delegate?.setCurrentLocation(loc: location.coordinate)
         })
     }
 }
