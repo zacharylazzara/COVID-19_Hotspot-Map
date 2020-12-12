@@ -4,6 +4,8 @@
 //
 //  Created by Zachary Lazzara on 2020-11-21.
 //
+//  Group #2: Zachary Lazzara (991 349 781), Yaun Wang (991 470 659)
+//
 
 import Foundation
 import CoreLocation
@@ -17,9 +19,8 @@ protocol LocationDelegate {
 class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     
-    // Set to Sheridan College Trafalgar as default coordinates? (doesn't seem to work consistently; will implement later)
-    @Published public var lat: Double = 0// 43.4684
-    @Published public var lng: Double = 0// -79.6991
+    @Published public var lat: Double = 0
+    @Published public var lng: Double = 0
     
     public var delegate:LocationDelegate?
     

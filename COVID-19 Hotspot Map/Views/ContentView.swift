@@ -4,6 +4,8 @@
 //
 //  Created by Zachary Lazzara on 2020-11-21.
 //
+//  Group #2: Zachary Lazzara (991 349 781), Yaun Wang (991 470 659)
+//
 
 import SwiftUI
 
@@ -35,7 +37,7 @@ struct ContentView: View {
                         destination: ProvincialSummaryView(),
                         label: {
                             Text("\(Image(systemName: "waveform.path.ecg"))\(String(format:"%.2f", covidViewModel.getCurrentLocality()?.threatLevel ?? 0))")
-                        }).foregroundColor(.red) // TODO: we should colour code this based on how it compares to all other regions
+                        }).foregroundColor(.red)
                 },
                 trailing: HStack {
                     NavigationLink(destination: ProvincesView(localities: covidViewModel.getLocalities())) {

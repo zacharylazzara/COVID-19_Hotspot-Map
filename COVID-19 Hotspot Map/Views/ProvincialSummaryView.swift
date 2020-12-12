@@ -4,8 +4,8 @@
 //
 //  Created by Zachary Lazzara on 2020-11-24.
 //
-
-// TODO: display a summary of the COVID-19 data for this province, such as mortality percentage and other information
+//  Group #2: Zachary Lazzara (991 349 781), Yaun Wang (991 470 659)
+//
 
 import SwiftUI
 

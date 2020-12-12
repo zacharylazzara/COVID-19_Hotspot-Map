@@ -4,16 +4,12 @@
 //
 //  Created by Zachary Lazzara on 2020-11-21.
 //
+//  Group #2: Zachary Lazzara (991 349 781), Yaun Wang (991 470 659)
+//
 
 import Foundation
 import CoreData
 import WatchConnectivity //added watch connectivity
-
-// TODO: some locations aren't getting data, such as Vancouver (must be a problem matching the strings?)
-
-// TODO: we need to display cases on the map, associated with their pin marks (we should use custom pin marks)
-
-// TODO: we should pull data from CoreData on initialize if it already exists, otherwise we load from JSON file
 
 class CovidViewModel : NSObject, ObservableObject, LocationDelegate, WCSessionDelegate {
     private var apiURLString = "https://api.opencovid.ca/"
@@ -22,8 +18,6 @@ class CovidViewModel : NSObject, ObservableObject, LocationDelegate, WCSessionDe
     private var moc: NSManagedObjectContext?
     
     var session: WCSession?
-    
-    // TODO: maybe the threat level should scale based on distance from centre of city (coordinates found in our locality json)
     
     @Published private var localities:[String:Locality] = [:] // This is a dictionary of all localities in Canada
     @Published private var currentLocality: Locality? // This is where the user is currently located
@@ -85,9 +79,6 @@ class CovidViewModel : NSObject, ObservableObject, LocationDelegate, WCSessionDe
         }
     }
     
-    
-    // TODO: we'll probably use densities (for the city not province) to determine probability of infection (it will determine danger score)
-    
     public let provinceDensities = [
         "Prince Edward Island": 24.7,
         "Nova Scotia": 17.4,
@@ -120,7 +111,7 @@ class CovidViewModel : NSObject, ObservableObject, LocationDelegate, WCSessionDe
         "Nunavut": 35944
     ]
     
-    public let covidReproductiveNumber = 1.1 // This is the COVID-19 Reproductive Number; we should try and get it from an API for our region if possible, as it varies per region and over time
+    public let covidReproductiveNumber = 1.1
     
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "COVID_19_Hotspot_Map")
@@ -152,7 +143,7 @@ class CovidViewModel : NSObject, ObservableObject, LocationDelegate, WCSessionDe
                 let provincePopulation = Int64(self.provincePopulations[locality.province!]!)
                 locality.provinceCases = Int64(province?.activeCases ?? 0)
                 
-                // NOTE: These are the predictions; we can tweak them to make the predictions better
+                // NOTE: These are the predictions
                 locality.covidCases = Int64(Double(locality.population) / Double(provincePopulation) * Double(province?.activeCases ?? 0))
                 locality.threatLevel = Double(locality.covidCases) / Double(locality.population) * Double(locality.density) * self.covidReproductiveNumber
                 

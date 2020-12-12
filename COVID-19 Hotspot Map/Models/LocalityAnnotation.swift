@@ -4,6 +4,8 @@
 //
 //  Created by Zachary Lazzara on 2020-11-24.
 //
+//  Group #2: Zachary Lazzara (991 349 781), Yaun Wang (991 470 659)
+//
 
 import Foundation
 import MapKit

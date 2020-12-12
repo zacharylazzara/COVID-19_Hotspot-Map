@@ -4,6 +4,8 @@
 //
 //  Created by Zachary Lazzara on 2020-11-24.
 //
+//  Group #2: Zachary Lazzara (991 349 781), Yaun Wang (991 470 659)
+//
 
 import SwiftUI
 import MapKit
@@ -46,11 +48,7 @@ struct MapView: UIViewRepresentable {
         map.isZoomEnabled = true
         map.isScrollEnabled = true
         map.isUserInteractionEnabled = true
-        //map.userTrackingMode = MKUserTrackingMode.none
-        //map.cameraZoomRange = CameraZoomRange(1, 5) // It doesn't work and I don't know why so I'm not doing it right now its just not worth it.
-        //map.setCameraZoomRange(CLLocationDistance(5), animated: true)
         
-//        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.locationManager.lat, longitude: self.locationManager.lng)
         let sourceCoordinates = CLLocationCoordinate2D(latitude: self.currentLocation.latitude, longitude: self.currentLocation.longitude)
         let region = MKCoordinateRegion(center: sourceCoordinates, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         
@@ -61,17 +59,12 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-//        let sourceCoordinates = CLLocationCoordinate2D(latitude: self.locationManager.lat, longitude: self.locationManager.lng)
         let sourceCoordinates = CLLocationCoordinate2D(latitude: self.currentLocation.latitude, longitude: self.currentLocation.longitude)
         let region = MKCoordinateRegion(center: sourceCoordinates, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         
         if (covidViewModel.isDataInitialized()) {
             localities.forEach { locality in
-                // TODO: get radius of each city?
                 let localityAnnotation = LocalityAnnotation(locality: locality)
-//                let circle = MKCircle(center: localityAnnotation.coordinate, radius: 1000)
-//                uiView.addOverlay(circle)
-                
                 uiView.addAnnotation(localityAnnotation)
             }
         }
@@ -111,9 +104,9 @@ struct MapView: UIViewRepresentable {
             
             if (localityPlacemark == nil) {
                 localityPlacemark = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                localityPlacemark!.image = UIImage(systemName: "cross.circle.fill") // TODO: colour code this?
+                localityPlacemark!.image = UIImage(systemName: "cross.circle.fill")
                 localityPlacemark!.canShowCallout = true
-                localityPlacemark!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) // TODO: needs to bring us to a detail page
+                localityPlacemark!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             } else {
                 localityPlacemark?.annotation = annotation
             }
@@ -125,11 +118,6 @@ struct MapView: UIViewRepresentable {
             guard let localityPlacemark = view.annotation as? LocalityAnnotation else { return }
             self.showInfo.toggle()
             self.infoLoc = localityPlacemark.locality
-            
-            // TODO: the map view jumps back to the user location when the view displays; we need to prevent that somehow
-            
-            //let center = CLLocationCoordinate2D(latitude: infoLoc?.lat ?? 0, longitude: infoLoc?.lng ?? 0)
-            //mapView.setCenter(center, animated: true)
         }
     }
 }
