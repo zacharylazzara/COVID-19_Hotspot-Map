@@ -14,8 +14,8 @@ Zachary:
 - Detail view
 
 Yuan:
-- Watch OS Connectivity
-- Watch OS Content View / Complication
+- Watch OS Connectivity/Content View/Complication
+- UserDefault
 - ProvinceCitiesView
 - ProvincesView
 - Navigation to currentLocation from ProvinceCitiesView
@@ -36,8 +36,9 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 
 **iOS Services and Functionality:**
 -	CoreData
--	Watch OS
+- UserDefault
 -	Location Services
+-	Watch OS
 -	Views
 -	NavigationView
 -	MapView
