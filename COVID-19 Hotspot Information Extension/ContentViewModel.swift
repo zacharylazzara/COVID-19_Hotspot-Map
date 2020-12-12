@@ -4,6 +4,8 @@
 //
 //  Created by Yuna on 2020-12-10.
 //
+//  Group #2: Zachary Lazzara (991 349 781), Yaun Wang (991 470 659)
+//
 
 import Foundation
 import WatchConnectivity
