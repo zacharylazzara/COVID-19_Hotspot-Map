@@ -19,6 +19,7 @@ Yuan:
 - ProvinceCitiesView
 - ProvincesView
 - Navigation to currentLocation from ProvinceCitiesView
+- Localization
 
 **Purpose:**<br/>
 The purpose of this app is to display a heatmap of COVID-19 cases across Canada and inform the user whether they’re in a probable hotspot or not (since information on cases are not posted by city we have to make predictions based on population size and density).
