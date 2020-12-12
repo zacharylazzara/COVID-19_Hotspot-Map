@@ -30,8 +30,9 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 **Main Features:**
 - View estimated number of active COVID-19 cases per city
 -	See a heat map of active Canadian COVID-19 cases
--	View a leaderboard of the worst hit cities and provinces (includes their associated risk scores)
+-	View a list of the cities from different provinces (includes their associated risk scores and data)
 -	View a risk score for your location
+- Display crucial information and suggestion through Watch OS 
 
 **iOS Services and Functionality:**
 -	CoreData
