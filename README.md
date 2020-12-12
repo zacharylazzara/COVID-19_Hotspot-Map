@@ -1,7 +1,7 @@
 # COVID-19_Hotspot-Map
 
 **App Name:** COVID-19 Hotspot Map <br/>
-**Group #2:** Zachary (991 349 781), Yaun (991 470 659)
+**Group #2:** Zachary (991 349 781), Yuan (991 470 659)
 
 **Date:** November 30, 2020
 
@@ -46,6 +46,7 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 - List
 - Z Stack / V Stack / H Stack
 - Gesture
+- Image
 
 
 **Entities:**
