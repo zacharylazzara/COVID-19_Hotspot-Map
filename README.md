@@ -79,7 +79,7 @@ View Details:
 1.	The user can view their details, such as their COVID-19 risk-score; this score is based on the population density and the predicted cases for the areas the user has been; it takes into account the user’s history within the past 14 days
 
 View On Watch OS:
-1.  The user can view the updated information / suggestion based on their current location on watch OS and it's complication
+1.  The user can view the updated information / suggestion based on their current location on watch OS and its complication
 
 
 
