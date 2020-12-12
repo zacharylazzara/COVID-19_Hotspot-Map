@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  COVID-19 Hotspot Map
+
+  Created by Yuna on 2020-12-11.
+  
+*/
+
+"Population Information" = "Population Information";
+"Population" = "Population";
+"Population Density" = "Population Density";
+"COVID-19 Information for" = "COVID-19 Information for";
+"Estimated Threat Level" = "Estimated Threat Level";
+"Reported Provincial Cases" = "Reported Provincial Cases";
+"Estimated Local Cases" = "Estimated Local Cases";
+"Dismiss" = "Dismiss";
+"We Are In This Together" = "We Are In This Together";
+"COVID-19 Statistics" = "COVID-19 Statistics";
+"Estimated Cases" = "Estimated Cases";
+"Reported Cases" = "Reported Cases";
+"Symptoms" = "Symptoms";
+"New or worsening cough" = "New or worsening cough";
+"Shortness of breath or difficulty breathing" = "Shortness of breath or difficulty breathing";
+"Temperature equal to or over 38°C" = "Temperature equal to or over 38°C";
+"Feeling feverish" = "Feeling feverish";
+"Fatigue or weakness" = "Fatigue or weakness";
+"Muscle or body aches" = "Muscle or body aches";
+"New loss of smell or taste" = "New loss of smell or taste";
+"Headache" = "Headache";
+"Gastrointestinal symptoms" = "Gastrointestinal symptoms";
+"Feeling very unwell" = "Feeling very unwell";
+"COVID-19 can spread asymptomatically" = "COVID-19 can spread asymptomatically";
+"Symptoms may take up to 14 days to appear" = "Symptoms may take up to 14 days to appear";
+"Please Select or Search for a city" = "Please Select or Search for a city";
+"Search" = "Search";
+"Cases" = "Cases";
+"Threat Level" = "Threat Level";
+"Suggestion" = "Suggestion";
+"Please be EXTREMELY careful when you are out" = "Please be EXTREMELY careful when you are out";
+"Going outside should be ok but please be careful" = "Going outside should be ok but please be careful";
+"Your region is safe so far! keep it up and we are this together" = "Your region is safe so far! keep it up and we are this together";
+"Dangerous" = "Dangerous";
+"Safe but be careful" = "Safe but be careful";
+"Safe" = "Safe";
+

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		AE206808257E9D2200F36079 /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE206807257E9D2200F36079 /* NavigationHelper.swift */; };
 		AE206810257EA06E00F36079 /* ProvinceCitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE20680F257EA06E00F36079 /* ProvinceCitiesView.swift */; };
+		AE3F049925844750002CBF5D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE3F049D25844750002CBF5D /* Localizable.strings */; };
+		AE3F049A25844750002CBF5D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE3F049D25844750002CBF5D /* Localizable.strings */; };
+		AE3F049B25844750002CBF5D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE3F049D25844750002CBF5D /* Localizable.strings */; };
 		AE4EF680257EF60000ADA310 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4EF67F257EF60000ADA310 /* SearchBar.swift */; };
 		AE80F0762583E39200A5B30E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE80F0752583E39200A5B30E /* ContentViewModel.swift */; };
 		B61D09632570A1CB00734CEF /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B61D09612570A1CB00734CEF /* Interface.storyboard */; };
@@ -95,6 +98,10 @@
 /* Begin PBXFileReference section */
 		AE206807257E9D2200F36079 /* NavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
 		AE20680F257EA06E00F36079 /* ProvinceCitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvinceCitiesView.swift; sourceTree = "<group>"; };
+		AE3F049E258447C5002CBF5D /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		AE3F049F258447C5002CBF5D /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Interface.strings"; sourceTree = "<group>"; };
+		AE3F04A0258447C6002CBF5D /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AE3F04A425844B4E002CBF5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AE4EF67F257EF60000ADA310 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		AE80F0752583E39200A5B30E /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		B61D095F2570A1CB00734CEF /* COVID-19 Hotspot Information.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19 Hotspot Information.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +197,7 @@
 		B63872192569879C00174C71 = {
 			isa = PBXGroup;
 			children = (
+				AE3F049D25844750002CBF5D /* Localizable.strings */,
 				B63872242569879C00174C71 /* COVID-19 Hotspot Map */,
 				B61D09602570A1CB00734CEF /* COVID-19 Hotspot Information */,
 				B61D096F2570A1CE00734CEF /* COVID-19 Hotspot Information Extension */,
@@ -358,6 +366,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"fr-CA",
 			);
 			mainGroup = B63872192569879C00174C71;
 			productRefGroup = B63872232569879C00174C71 /* Products */;
@@ -377,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B61D09652570A1CE00734CEF /* Assets.xcassets in Resources */,
+				AE3F049A25844750002CBF5D /* Localizable.strings in Resources */,
 				B61D09632570A1CB00734CEF /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B61D09802570A1CF00734CEF /* Preview Assets.xcassets in Resources */,
+				AE3F049B25844750002CBF5D /* Localizable.strings in Resources */,
 				B61D097D2570A1CF00734CEF /* Assets.xcassets in Resources */,
 				B61D09932570A21900734CEF /* canadacities.json in Resources */,
 			);
@@ -395,6 +406,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE3F049925844750002CBF5D /* Localizable.strings in Resources */,
 				B63872352569879E00174C71 /* LaunchScreen.storyboard in Resources */,
 				B67DCF502569F20200A3DBA6 /* canadacities.json in Resources */,
 				B63872322569879E00174C71 /* Preview Assets.xcassets in Resources */,
@@ -465,10 +477,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AE3F049D25844750002CBF5D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE3F04A0258447C6002CBF5D /* fr-CA */,
+				AE3F04A425844B4E002CBF5D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B61D09612570A1CB00734CEF /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B61D09622570A1CB00734CEF /* Base */,
+				AE3F049F258447C5002CBF5D /* fr-CA */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -477,6 +499,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B63872342569879E00174C71 /* Base */,
+				AE3F049E258447C5002CBF5D /* fr-CA */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -576,6 +599,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -637,6 +661,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  COVID-19 Hotspot Map
+
+  Created by Yuna on 2020-12-11.
+  
+*/
+
+"Population Information" = "Information sur la population";
+"Population" = "Population";
+"Population Density" = "Densité de population";
+"COVID-19 Information for" = "Informations COVID-19 pour";
+"Estimated Threat Level" = "Niveau de menace estimé";
+"Reported Provincial Cases" = "Cas provinciaux signalés";
+"Estimated Local Cases" = "Estimated Local Cases";
+"Dismiss" = "Rejeter";
+"We Are In This Together" = "We Are In This Together";
+"COVID-19 Statistics" = "Statistiques COVID-19";
+"Estimated Cases" = "Cas estimés";
+"Reported Cases" = "Cas signalés";
+"Symptoms" = "Symptômes";
+"New or worsening cough" = "Toux nouvelle ou aggravée";
+"Shortness of breath or difficulty breathing" = "Toux nouvelle ou aggravée";
+"Temperature equal to or over 38°C" = "Température égale ou supérieure à 38 ° C";
+"Feeling feverish" = "Se sentir fiévreux";
+"Fatigue or weakness" = "Fatigue ou faiblesse";
+"Muscle or body aches" = "Douleurs musculaires ou corporelles";
+"New loss of smell or taste" = "Nouvelle perte d'odeur ou de goût";
+"Headache" = "Mal de crâne";
+"Gastrointestinal symptoms" = "Symptômes gastro-intestinaux";
+"Feeling very unwell" = "Se sentir très mal";
+"COVID-19 can spread asymptomatically" = "COVID-19 peut se propager de manière asymptomatique";
+"Symptoms may take up to 14 days to appear" = "Les symptômes peuvent prendre jusqu'à 14 jours pour apparaître";
+"Please Select or Search for a city" = "Veuillez sélectionner ou rechercher une ville";
+"Search" = "Chercher";
+"Cases" = "Cas";
+"Threat Level" = "Niveau de menace";
+"Suggestion" = "Suggestion";
+"Please be EXTREMELY careful when you are out" = "Veuillez être EXTRÊMEMENT prudent lorsque vous êtes absent";
+"Going outside should be ok but please be careful" = "Aller dehors devrait être ok mais soyez prudent";
+"Your region is safe so far! keep it up and we are this together" = "Votre région est en sécurité jusqu'à présent! continuez comme ça et nous sommes ensemble";
+"Dangerous" = "Dangereuse";
+"Safe but be careful" = "Sûr mais attention";
+"Safe" = "Sûre";
