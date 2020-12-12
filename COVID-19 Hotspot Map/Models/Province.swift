@@ -12,14 +12,6 @@ import Foundation
 struct Province: Decodable {
     var name: String
     var date: Date
-    var testing: Int
-    var cases: Int
-    var deaths: Int
-    var recovered: Int
     var activeCases: Int
-    var activeCasesChange: Int
     var cumulativeCases: Int
-    var cumulativeDeaths: Int
-    var cumulativeRecovered: Int
-    var cumulativeTesting: Int
 }

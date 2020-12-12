@@ -18,16 +18,8 @@ struct ProvincialSummary : Decodable {
         case summary = "summary"
         case name = "province"
         case date = "date"
-        case testing = "testing"
-        case cases = "cases"
-        case deaths = "deaths"
-        case recovered = "recovered"
         case activeCases = "active_cases"
-        case activeCasesChange = "active_cases_change"
         case cumulativeCases = "cumulative_cases"
-        case cumulativeDeaths = "cumulative_deaths"
-        case cumulativeRecovered = "cumulative_recovered"
-        case cumulativeTesting = "cumulative_testing"
     }
     
     init(from decoder: Decoder) throws {
@@ -44,16 +36,8 @@ struct ProvincialSummary : Decodable {
             provinces[provinceName] = Province(
                 name: provinceName,
                 date: dateFormatter.date(from: try regionSummary.decodeIfPresent(String.self, forKey: .date)!)!,
-                testing: 0,//try regionSummary.decodeIfPresent(Int.self, forKey: .testing)!,
-                cases: 0,//try regionSummary.decodeIfPresent(Int.self, forKey: .cases)!,
-                deaths: 0,//try regionSummary.decodeIfPresent(Int.self, forKey: .deaths)!,
-                recovered: 0,//try regionSummary.decodeIfPresent(Int.self, forKey: .recovered)!,
                 activeCases: try regionSummary.decodeIfPresent(Int.self, forKey: .activeCases)!,
-                activeCasesChange: 0,//try regionSummary.decodeIfPresent(Int.self, forKey: .activeCasesChange)!,
-                cumulativeCases: try regionSummary.decodeIfPresent(Int.self, forKey: .cumulativeCases)!,
-                cumulativeDeaths: 0,//try regionSummary.decodeIfPresent(Int.self, forKey: .cumulativeDeaths)!,
-                cumulativeRecovered: 0,//try regionSummary.decodeIfPresent(Int.self, forKey: .cumulativeRecovered)!,
-                cumulativeTesting: 0//try regionSummary.decodeIfPresent(Int.self, forKey: .cumulativeTesting)!
+                cumulativeCases: try regionSummary.decodeIfPresent(Int.self, forKey: .cumulativeCases)!
             )
         }
     }
