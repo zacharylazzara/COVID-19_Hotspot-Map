@@ -69,11 +69,10 @@ Everyone, especially at-risk individuals who would benefit from the access to th
 
 **Use-Cases**<br/>
 View Cities:
-1.	The user can view a sorted list of cities within the province, and navigate to the map location on tap
+1.	The user can view a sorted list of cities within each province, and navigate to the map location on tap gesture
 
 View Heatmap:
 1.	The first view the user is presented with is the heatmap; this view shows the user’s current location on a heatmap of COVID-19 cases by locality
-2.	As the user goes about their day location data is recorded; this historic data is plotted on the heatmap so the user can see where they’ve been and if they’ve entered a COVID-19 hotspot
 
 View Details:
 1.	The user can view their details, such as their COVID-19 risk-score; this score is based on the population density and the predicted cases for the areas the user has been; it takes into account the user’s history within the past 14 days
